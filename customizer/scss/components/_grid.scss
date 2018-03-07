@@ -1,0 +1,12 @@
+.cft-g{
+	margin-left:-30px;
+	@include box-sizing(border-box);
+	& > .cft-gi{
+		padding-left:30px;
+		display:inline-block;
+		vertical-align:middle;
+		@include box-sizing(border-box);
+	}
+}
+
+

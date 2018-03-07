@@ -1,0 +1,21 @@
+[
+		{
+		"id":1,
+		"name":"No Hardware",
+		"thumb":"/images/controls/hardware/no-hardware.jpg",
+		"layer":"/images/controls/hardware/no-hardware.jpg"
+	},
+	{
+		"id":2,
+		"name":"Silver",
+		"thumb":"/images/controls/button-silver.jpg",
+		"layer":"/images/controls/button-silver.jpg"
+	},
+	{
+		"id":3,
+		"name":"Copper",
+		"thumb":"/images/controls/button-copper.jpg",
+		"layer":"/images/controls/button-copper.jpg"
+	}
+	
+]

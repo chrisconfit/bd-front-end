@@ -1,0 +1,97 @@
+<div class="inmodal">
+	
+	<div class="modal-header">
+	  <h4 class="modal-title"><i class="fa {{icon}}" aria-hidden="true"></i> {{addressType}} Address</h4>
+	  <small class="font-bold">Choose from the user's address below or enter a new address.</small>
+	</div>
+	
+	<div class="modal-body">
+		<div class="addresses">
+
+			<div class="single-address" ng-repeat="add in addresses">
+				<div class="radio radio-primary">
+			    <input type="radio" id="address_{{add.id}}" id="name_{{add.id}}"
+			    ng-value="add.id"  
+					ng-model="a.selected"
+					ng-click="newAdd.editing=false">
+			    <label for="address_{{add.id}}">
+			    	{{add.address_line_1}}
+						<br ng-if="add.address_line_2">{{add.address_line_2}}
+						<br>{{add.city}}, {{add.state}} {{add.zip}}
+					</label>
+				</div>
+				<hr>
+			</div>
+
+			<div class="radio radio-primary">
+				<input name="newAdd_toggle" id="newAdd_toggle" type="radio"  
+				ng-click="newAdd.editing=true; a.selected=null"
+				ng-checked="newAdd.editing">
+			  <label for="newAdd_toggle">Add New Address</label>
+			</div>  
+			
+			<!--New Address Form-->
+			<div class="newAdd-form" ng-if="newAdd.editing">
+			  <form method="get" name="forms.newAdd" class="form-horizontal">
+					
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Street 1</label>
+						<div class="col-sm-10">
+							<input type="text" name="address_line_1" ng-model="newAdd.form.address_line_1" class="form-control" required>
+							<div ng-show="validCheck(forms.newAdd.address_line_1)">
+								<small class="text-danger" ng-show="forms.newAdd.address_line_1.$error.required">Please Enter an Address</small>
+	            </div>
+						</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Street 2</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newAdd.form.address_line_2" class="form-control">
+						</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">City</label>
+						<div class="col-sm-10">
+							<input type="text" name="city" ng-model="newAdd.form.city" class="form-control" required>
+							<div ng-show="validCheck(forms.newAdd.city)">
+								<small class="text-danger" ng-show="forms.newAdd.city.$error.required">Please Enter an City</small>
+	            </div>
+						</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">State</label>
+						<div class="col-sm-10">
+							<select ng-options="state.abbreviation as state.name for state in states" name="state" ng-model="newAdd.form.state" class="form-control" required></select>
+							<div ng-show="validCheck(forms.newAdd.state)">
+								<small class="text-danger" ng-show="forms.newAdd.state.$error.required">Please Enter an State</small>
+	            </div>
+						</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Zip</label>
+						<div class="col-sm-10">
+							<input type="text" name="zip" ng-model="newAdd.form.zip" class="form-control">
+							<div ng-show="validCheck(forms.newAdd.zip)">
+								<small class="text-danger" ng-show="forms.newAdd.zip.$error.required">Please Enter an Zip</small>
+	            </div>
+						</div>
+          </div>
+
+			  </form>		  
+			</div>	
+			<!--/New Address Form-->
+				
+		</div>
+	</div>
+	
+	
+	<div class="modal-footer">
+    <button type="button" class="btn btn-white" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-disabled="!a.selected && !newAdd.editing" ng-click="ok(forms.newAdd)">Save changes</button>
+	</div>
+</div>
+

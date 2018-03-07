@@ -1,0 +1,109 @@
+<div class="control-panel-inner template-{{vm.panel[vm.panelStep].panelTemplate}}">
+	
+		<div class="switch">					
+			<ul>
+				<li ng-repeat="(key, val) in vm.panel" ng-class="{ active: vm.panelStep==key }">
+					<a ng-click="vm.changeStep(key)" href="">{{key+1}}</a>
+				</li>
+			</ul>
+		</div>
+				
+		<div class="build-step-stage {{vm.panelDir}} {{vm.panel[vm.panelStep].panelTemplate}}">			
+			<div class="step-container template-{{step.panelTemplate}}" ng-class="(step.panelTemplate != 'chooser' ? 'fade':'chooser-anim')" ng-repeat="step in vm.panel" ng-show="vm.panel[vm.panelStep] == step">	
+
+				<!--Gender Chooser-->
+				<gender-chooser 
+				active="vm.panel[vm.panelStep]==step"
+				ng-if="step.panelTemplate=='gender-chooser'" 
+				on-click="chvm.selectAttr" 
+				dataset="vm.data[step.dataKey]" 
+				step="step"
+				></gender-chooser>
+								
+				<!--Style Chooser-->
+				<div style-chooser
+				active="vm.panel[vm.panelStep]==step"
+				ng-if="step.panelTemplate=='style-chooser'" 
+				on-click="chvm.selectAttr" 
+				dataset="vm.data[step.dataKey]" 
+				step="step"
+				></div>
+
+				<!--Fabric Chooser-->
+				<fabric-chooser
+				active="vm.panel[vm.panelStep]==step"
+				ng-if="step.panelTemplate=='fabric-chooser'" 
+				on-click="chvm.selectAttr" 
+				dataset="vm.data[step.dataKey]" 
+				step="step"
+				></fabric-chooser>
+
+				<!--All Other Choosers-->
+				<chooser 
+				active="vm.panel[vm.panelStep]==step"
+				ng-if="step.panelTemplate=='chooser'" 
+				on-click="chvm.selectAttr" 
+				dataset="vm.data[step.dataKey]" 
+				step="step"
+				></chooser>
+
+				<!--Overview-->
+				<div ng-if="step.panelTemplate=='list'" class="overview" >
+					<div class="jean-overview" ng-init="vm.overveiewOn = false">
+						<a class="overview-trigger" ng-click="vm.overviewOn=!vm.overviewOn" href="">
+							Overview <i ng-class="(vm.overviewOn ? 'fa-angle-down' : 'fa-angle-up')" class="fa"></i>
+						</a>
+						<div class="jean-list" ng-class="(vm.overviewOn ? 'show' :'hide')">
+							<h3 class="jean-name" ng-if="vm.jeanData.name">{{vm.jeanData.name}}</h3>
+							<jean-list data="vm.data" jean="vm.jean"></jean-list>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div><!--/.build-step-stage-->
+		
+		
+		<div class="action" >
+			<div class="cft-g action-grid">
+				<div class="cft-gi">
+					<social-actions jean="vm.jeanData" uploaded="vm.shareImageUploaded" display="vm.displaySocial"></social-actions>
+					<a class="btn" ng-click="vm.share('displaySocial')" href="#">
+						Share <i class="fa fa-share" aria-hidden="true"></i>
+					</a>
+			  </div><!--
+				--><div class="cft-gi">
+					<a class="btn" ng-click="vm.saveJean()" href="#">
+						Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+					</a>
+			  </div>
+			</div>
+			<a class="btn order" ng-click="vm.placeOrder()" href="#">
+				Order
+			</a>
+		</div>
+		
+		<div ng-show="vm.panel[vm.panelStep].panelTemplate!='list'" class="active-item">
+			<a href="#" id="item-title" class="item-title {{vm.panel[vm.panelStep].jeanKey}}"
+				ng-click="vm.panel[vm.panelStep].jeanKey != 'fabric_id' || (vm.popups.infoPop=true)">
+        {{vm.activeItem | displayName}} <i class="fa fa-question-circle"> </i>
+			</a>
+		</div>
+		
+		<h3 class="control-title">
+			<div class="builder-control-container">		
+				<a href="" class="fade builder-control-arrow" ng-show="vm.panelStep > 0" ng-click="vm.panelDir='prev'; vm.changeStep(vm.panelStep-1)">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a href="" class="fade builder-control-arrow" ng-show="vm.panelStep < vm.panel.length-1" 
+					ng-click="vm.panelDir='next'; vm.changeStep(vm.panelStep+1)">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
+			{{vm.panel[vm.panelStep].title}} <i ng-if="vm.panel[vm.panelStep].title == 'Fabric'" ng-click="vm.popups.denim=true" class="denim-info-button fa fa-question-circle"></i>
+		</h3>
+		
+	</div><!--/.control-panel-inner-->
+	
+
+	

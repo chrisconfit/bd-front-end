@@ -1,0 +1,93 @@
+<div ng-show="popups.hiw" ng-click="popups.hiw = false" id="how-it-works" class="popup-window">
+	<div class="popup-content" ng-click="$event.stopPropagation()">
+		<a class="popup-closer" href="" ng-click="popups.hiw = false"></a>
+		<div class="popup-content-inner">
+				<h3 class="popup-title">How it works</h3>
+					<!--<p>The Blue Delta Jean Builder & Closet helps you build, save, share and order your custom jeans.</p>
+					<p>Each pair of Blue Delta Jeans is customized to your body and you will work closely with a Blue Delta Representative to fit and personalize your jeans. Our customizer helps you start deciding on your style, fabric, and thread colors before we walk you through the rest of the process.</p>-->
+					
+				<p>We have a couple of ways for you to buy a pair of Blue Delta Jeans. If you are an existing member of the Blue Delta Jeans Family, you can always re-order a pair of jeans in your <strong><a href="closet">closet</a></strong>, of use a previous pair of jeans as your fit for a new pair.</p>
+				<div class="cft-g hiw-popup-grid">
+					<div class="cft-gi">
+						<div class="box-content">
+							<h3 class="box-title">Bespoke</h3>
+							<p class="price">From $500</p>
+							<p>Choose from our full selection of fabrics, threads, and styles to create your bespoke jean. With the help of a Blue Delta Jeans tailor, you can design your perfect jean. </p>
+							<div class="option-list">
+						    <ul>
+							    <li>Get fitted by a BDJ Stylist or one of our partner tailors</li>
+							    <li>Choose from our full selection of 30+ fabrics</li>
+							    <li>Design your jean using our full range of thread options</li>
+							    <li>A personal pattern that is hand-drafted and kept on file for easy re-order through your BDJ online closet</li>
+							    <li>Personalized consultation with Blue Delta stylist to design your bespoke jeans</li>
+							    <li>Add on options available - rivets, custom pocket bags, monogramming, and more</li>
+							    <li>Lifetime Alterations and Repairs</li>
+						    </ul>
+							</div>
+							<a href="" ng-click="popups.hiw = false" class="btn">Start Building</a>
+						</div>	
+					</div><!--
+					--><div class="cft-gi">
+						<div class="box-content">
+							<h3 class="box-title">Fit Match</h3>
+							<p class="price">From $300</p>
+							<p>For those lucky few that have the perfect pair of jeans, we can match your fit! Choose from a limited selection of raw denim fabrics to design your fit match jean.</p>
+							<div class="option-list">
+						    <ul>
+							    <li>Mail in your favorite jeans and we will match the fit</li>
+							    <li>Choose from our 8 Fit Match fabrics</li>
+							    <li class="disabled">Design your jean using our full range of thread options</li>
+							    <li class="disabled">A personal pattern that is hand-drafted and kept on file for easy re-order through your BDJ online closet</li>
+							    <li class="disabled">Personalized consultation with Blue Delta stylist to design your bespoke jeans</li>
+							    <li class="disabled">Add on options available - rivets, custom pocket bags, monogramming, and more</li>
+							    <li class="disabled">Lifetime Alterations and Repairs</li>
+						    </ul>
+					    </div>
+							<a href="http://bluedeltajeans.com/fit-match-program" class="btn">Try Fit Match</a>
+						</div>
+					</div>
+				</div>
+			<p><em>Please note, due to the custom nature of our bespoke jeans, we do not charge any money until your order details have been confirmed. A Blue Delta Jean Representative will be in touch within 24 hours of your order inquiry being placed to discuss personalization options and pricing.</em></p>
+			<p>Please don't hesitate to contact us if you have any questions about using the customizer or ordering your jeans - <a href="mailto:info@bluedeltajeans.com">info@bluedeltajeans.com</a> | 888.963.7879</p>
+		</div><!--./popup-content-inner-->
+	</div>
+</div>
+
+
+<div class="main-navigation">
+	<div class="container">	
+		<div class="head-left">
+			<!--<a class="mobile-info-button" ng-click="popups.hiw = !popups.hiw"><i class="fa fa-question"></i></a>-->
+			<a id="home-link" href="https://bluedeltajeans.com/"><img src="/images/bluedelta-logo.png" alt="Blue Delta Jeans"></a>
+			<span class="title">Jean Builder</span>
+		</div>
+		<nav class="main-nav nav-right">
+			
+			<a href="" class="mobile-menu-trigger btn" ng-click="navvm.mobileMenu=!navvm.mobileMenu">{{navvm.mobileMenu ? "Close" : "Menu"}}</a>
+			
+		  <ul ng-class="(navvm.mobileMenu ? 'mobileOpen' : 'mobileClosed')" ng-init="">
+			  <!--All views-->
+			  <li class="main-site"><a href="/customizer">Build</a></li>
+			  <li class="how-it-works" i><a ng-click="popups.hiw = !popups.hiw; navvm.mobileMenu=false"href="#">How it Works</a></li>
+			  
+			  <!--Not Logged In-->
+				<li class="closet" ng-if="!navvm.isLoggedIn"><a href="login">Closet</a></li>
+				<li class="sign-in" ng-if="!navvm.isLoggedIn"><a class="btn sign-in" href="login">Sign in</a></li>
+				<!--<li class="sign-in" ng-if="!navvm.isLoggedIn"><a class="btn register" href="register">Register</a></li>-->
+				
+				<!--Logged In-->
+				<li class="closet" ng-if="navvm.isLoggedIn"><a href="closet">Closet</a></li>
+				<li class="log-out" ng-if="navvm.isLoggedIn"><a class="btn logout" ng-click="navvm.logout()" href="/">Log Out</a></li>
+			
+		  </ul>
+		</nav>
+	</div>
+</div>
+
+<div class="loadingDiv {{navvm.loader.type}}" ng-class="{active: navvm.loader.active}">
+	<div class="loadingDiv-content">
+		<h3 ng-if="navvm.loader.message">{{navvm.loader.message}}</h3>
+		<i class="loading-icon fa {{navvm.loader.icon}}"></i>
+	</div>
+</div>
+

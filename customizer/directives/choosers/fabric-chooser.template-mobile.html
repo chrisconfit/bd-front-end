@@ -1,0 +1,77 @@
+<div class="description" ng-if="step.jeanKey == 'fabric'">
+	<p>We have a range of fabrics in different weights from lightweight linen to heavyweight raw denim. <a href="" ng-click="vm.builder.denimPop = !denimPop"><strong>Learn More.</strong></a></p>
+</div>
+<div class="cft-g chooser-grid" id="fabric_id-chooser">
+	<span ng-class="{ live: chvm.jeanData.fabric_id }" class="chooser-select" id="{{step.jeanKey}}-selector"></span>
+	
+	<div class="cft-gi bkg-container">
+		<div class="gt-bkg">
+			<span class="grid-title">Raw Denim<br><i class="fa fa-long-arrow-right"></i></span>
+		</div>
+	</div>
+	
+	<div class="cft-gi" ng-repeat="data in dataset | filter:{'fabric_type':'Raw Denim', 'deleted_at':null} | orderBy:'weight'">
+		<a ng-class="{ active: chvm.jeanData.fabric_id == data.id }" id="fabric_id_{{data.id}}"
+		href="" ng-click="chvm.selectAttr($event, data.id, step.jeanKey)">
+			<img ng-src="http://bluedelta-data.s3-website-us-east-1.amazonaws.com/images/components/fabrics/thumb/{{data.id}}.jpg">
+			<span class="fabric-weight">{{data.weight}}<span class="oz">oz</span></span>
+		</a>
+	</div>
+	<div class="cft-gi bkg-container">
+		<div class="gt-bkg">
+			<span class="grid-title">Duck Canvas<br><i class="fa fa-long-arrow-right"></i></span>
+		</div>
+	</div>
+	
+	<div class="cft-gi" ng-repeat="data in dataset | filter:{'fabric_type':'Duck Canvas', 'deleted_at':null} | orderBy:'weight'">
+		<a ng-class="{ active: chvm.jeanData.fabric_id == data.id }" id="fabric_id_{{data.id}}"
+		href="" ng-click="chvm.selectAttr($event, data.id, step.jeanKey)">
+			<img ng-src="http://bluedelta-data.s3-website-us-east-1.amazonaws.com/images/components/fabrics/thumb/{{data.id}}.jpg">
+			<span class="fabric-weight">{{data.weight}}<span class="oz">oz</span></span>
+		</a>
+	</div>
+	
+	<div class="cft-gi bkg-container">
+		<div class="gt-bkg">
+			<span class="grid-title">Holland & Sherry<br><i class="fa fa-long-arrow-right"></i></span>
+		</div>
+	</div>
+	
+	<div class="cft-gi" ng-repeat="data in dataset | filter:{'fabric_type':'Holland & Sherry', 'deleted_at':null} | orderBy:'weight'">
+		<a ng-class="{ active: chvm.jeanData.fabric_id == data.id }" id="fabric_id_{{data.id}}"
+		href="" ng-click="chvm.selectAttr($event, data.id, step.jeanKey)">
+			<img ng-src="http://bluedelta-data.s3-website-us-east-1.amazonaws.com/images/components/fabrics/thumb/{{data.id}}.jpg">
+			<span class="fabric-weight">{{data.weight}}<span class="oz">oz</span></span>
+		</a>
+	</div>
+	
+	
+	<!--<div class="cft-gi bkg-container">
+		<div class="gt-bkg">
+			<span class="grid-title">Rinsed Denim<br><i class="fa fa-long-arrow-right"></i></span>
+		</div>
+	</div>
+	
+	<div class="cft-gi" ng-repeat="data in dataset | filter:{'fabric_type':'Rinsed Denim', 'deleted_at':null} | orderBy:'weight'">
+		<a ng-class="{ active: chvm.jeanData.fabric_id == data.id }" id="fabric_id_{{data.id}}"
+		href="" ng-click="chvm.selectAttr($event, data.id, step.jeanKey)">
+			<img ng-src="http://bluedelta-data.s3-website-us-east-1.amazonaws.com/images/components/fabrics/thumb/{{data.id}}.jpg">
+			<span class="fabric-weight">{{data.weight}}<span class="oz">oz</span></span>
+		</a>
+	</div>-->
+</div>
+
+ 
+<!--
+<div class="cft-g chooser-grid" id="fabric_id-chooser">
+	<span ng-class="{ live: chvm.jeanData.fabric_id }" class="chooser-select" id="{{step.jeanKey}}-selector"></span>
+	<div class="cft-gi" ng-repeat="data in dataset | orderBy:'weight'">
+		<a ng-class="{ active: chvm.jeanData.fabric_id == data.id }" id="fabric_{{data.id}}" 
+		href="" ng-click="chvm.selectAttr($event, data.id, step.jeanKey)">
+			<img ng-src="http://bluedelta-data.s3-website-us-east-1.amazonaws.com/images/components/fabrics/thumb/{{data.id}}.jpg">
+			<span class="fabric-weight">{{data.weight}}<span class="oz">oz</span></span>
+		</a>
+	</div>
+</div>
+
+-->

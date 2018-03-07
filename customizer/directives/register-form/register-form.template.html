@@ -1,0 +1,23 @@
+<form novalidate class="cft-form register-form" ng-submit="regvm.registerUser()">
+  <div ng-class="{active: regvm.credentials.first_name.length}" class="input-group">
+    <input type="text" class="form-control" id="name" ng-model="regvm.credentials.first_name">
+    <label for="name">First name</label>
+  </div>
+  <div ng-class="{active: regvm.credentials.last_name.length}" class="input-group">
+    <input type="text" class="form-control" id="name" ng-model="regvm.credentials.last_name">
+    <label for="name">Last name</label>
+  </div>
+  <div ng-class="{active: regvm.credentials.email.length}" class="input-group">
+    <input type="text" class="form-control" id="email" ng-model="regvm.credentials.email">
+    <label for="email">Email address</label>
+  </div>
+  <div ng-class="{active: regvm.credentials.password.length}" class="input-group">
+    <input type="password" class="form-control" id="password" ng-model="regvm.credentials.password">
+    <label for="password">Password</label>
+  </div>
+  <div ng-class="{active: regvm.credentials.passwordConfirm.length}" class="input-group">
+    <input type="password" class="form-control" id="password-confirm" ng-model="regvm.credentials.passwordConfirm">
+    <label for="password-confirm">Confirm Password</label>
+  </div>
+	<button type="submit" class="btn btn-default">Register!</button>
+</form>

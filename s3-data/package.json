@@ -1,0 +1,9 @@
+{
+  "name": "bd-deploy-images",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-s3-upload": "^1.6.6"
+  }
+}

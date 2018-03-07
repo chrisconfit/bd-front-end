@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="inspinia">
+  <head>
+    <meta charset="utf-8">
+    <title>Blue Delta Jeans Admin</title>
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+		<link rel="manifest" href="/assets/images/manifest.json">
+		<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+		<script src="https://use.typekit.net/rjf0vtn.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-controller="MainController as main" class="{{main.state.current.name | routeToClass}}">
+	
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div ui-view></div>
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+    <script src="assets/scripts/shared/sqPaymentForm.directive.js"></script>
+    <script src="assets/scripts/shared/api.service.js"></script>
+    <script src="assets/scripts/shared/user.service.js"></script>
+		
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+		<script src="assets/scripts/oclazyload/dist/ocLazyLoad.min.js"></script>	
+  </body>
+</html>

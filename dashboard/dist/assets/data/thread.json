@@ -1,0 +1,63 @@
+[
+	{
+		"threadId":1,
+		"name":"Gold",
+		"layer": "/images/components/thread-gold.png",
+		"thumb": "/images/controls/thread-gold.jpg"
+	},
+	{
+		"threadId":2,
+		"name":"Rust",
+		"layer": "/images/components/thread-rust.png",
+		"thumb": "/images/controls/thread-rust.jpg"
+	},
+	{
+		"threadId":3,
+		"name":"Navy",
+		"layer": "/images/components/thread-navy-blue.png",
+		"thumb": "/images/controls/thread-navy.jpg"
+	},
+	{
+		"threadId":4,
+		"name":"Baby Blue",
+		"layer": "/images/components/thread-baby-blue.png",
+		"thumb": "/images/controls/thread-baby-blue.jpg"
+	},
+	{
+		"threadId":5,
+		"name":"Snow White",
+		"layer": "/images/components/thread-white.png",
+		"thumb": "/images/controls/thread-snow-white.jpg"
+	},
+	{
+		"threadId":6,
+		"name":"Red",
+		"layer": "/images/components/thread-red.png",
+		"thumb": "/images/controls/thread-red.jpg"
+	},
+	{
+		"threadId":7,
+		"name":"Brown",
+		"layer": "/images/components/thread-brown.png",
+		"thumb": "/images/controls/thread-brown.jpg"
+	},
+	{
+		"threadId":9,
+		"name":"Black",
+		"layer": "/images/components/thread-black.png",
+		"thumb": "/images/controls/thread-black.jpg"
+	},
+	{
+		"threadId":10,
+		"name":"Grey",
+		"layer": "/images/components/thread-grey.png",
+		"thumb": "/images/controls/thread-grey.jpg"
+	},
+	{
+		"threadId":11,
+		"name":"Green",
+		"layer": "/images/components/thread-green.png",
+		"thumb": "/images/controls/thread-green.jpg"
+	}
+]
+

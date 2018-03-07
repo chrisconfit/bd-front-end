@@ -1,0 +1,101 @@
+body,
+input,
+textarea,
+button,
+select {
+  @include font-size(18, 24); 
+  font-family: $bodyFontStack;
+  color: $colorText;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  display: block;
+  font-family: $headerFontStack;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $blue;
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
+.h1 a, .h2 a, .h3 a, .h4 a, .h5 a, .h6 a { font-weight: inherit;  }
+
+// Pixel to EM conversion tool http://pxtoem.com/
+h1, .h1 { @include font-size(30, 38);  }    
+h2, .h2 { @include font-size(26, 34); }  
+h3, .h3 { @include font-size(24, 32);}     
+h4, .h4 { @include font-size(20, 28); } 
+h5, .h5 { @include font-size(16, 24); } 
+h6, .h6 { @include font-size(16, 24);}     
+
+p { margin: 0 0 20px 0; }
+p img { margin: 0; }
+
+a {
+	color: $colorLink;
+	text-decoration: none;
+	@include transition(all,200ms,ease);
+	&:hover {
+		color: $colorLinkHover;
+	}
+}
+
+em { font-style: italic; }
+strong { font-weight: bold; }
+small { font-size: 80%; }
+
+// Blockquotes
+blockquote {
+  @include font-size(20, 28);
+  color: $colorTextGrey;
+  font-style: italic;
+  margin: 0 0 30px;
+  padding: 15px 30px;
+  border-left: 1px solid $borderColor;
+
+  p {
+    margin-bottom: 0;
+
+    & + cite {
+      margin-top:15px;
+    }
+  }
+
+  cite {
+    display: block;
+    @include font-size(14, 21);
+    color: $colorTextGrey;
+
+    &:before {
+      content: "\2014 \0020";
+    }
+  }
+}
+
+hr {
+  clear: both;
+  border-top: solid $borderColor;
+  border-width: 1px 0 0;
+  margin: 60px 0;
+
+  &.hr-small {
+    margin: 30px 0;
+  }
+
+  &.hr-clear {
+    border-top: 0 none;
+  }
+}
+

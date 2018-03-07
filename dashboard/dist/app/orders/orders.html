@@ -1,0 +1,144 @@
+	<div>
+		<div class="order-page orders-list-page row wrapper border-bottom white-bg page-heading">
+			<h2>Orders</h2>
+		</div>
+
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="ibox" ng-click="primaryBox=1" ng-class="{'ibox-primary':primaryBox==1}">
+					<div class="ibox-title">
+						<h3>Filters</h3>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-3">
+							  <div class="form-group">
+							    <label class="control-label" for="order_id">Order ID</label>
+							    <input type="text" ng-model="ovm.filters.id" id="order_id" name="order_id" class="form-control">
+							  </div>
+							</div>
+							<div class="col-sm-3">
+							  <div class="form-group">
+							    <label>Order Status</label>
+							    <select ng-options="s.id as s.name for s in ovm.data.order_statuses" class="form-control" 
+								  style="width: 100%;" ng-model="ovm.filters.order_status_id">
+									  <option value="">All</option>
+							    </select>
+							  </div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label>Payment Status</label>
+									<select ng-options="s.id as s.label for s in ovm.data.payment_statuses" class="form-control"
+													style="width: 100%;" ng-model="ovm.filters.payment_status_id">
+										<option value="">All</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-3">
+							  <div class="form-group">
+							    <label>Type</label>
+							    <select class="form-control" ng-options="t.id as t.name for t in ovm.data.order_types" 
+								  ng-model="ovm.filters.order_type_id" style="width: 100%;">
+										<option value="">All</option>
+							    </select>
+							  </div>
+							</div>
+            </div>
+            <div class="row">
+							<div class="col-sm-3">
+                <div class="form-group">
+                  <label>Date Range</label>
+									<input date-range-picker="" class="form-control date-picker" type="text" ng-model="ovm.dateRange">
+                </div>
+							</div>
+							<div class="col-sm-3">
+							  <div class="form-group">
+							    <label>Vendor</label>
+							    <select class="form-control" ng-options="v.id as v.name for v in ovm.data.vendors" 
+								   style="width: 100%;" ng-model="ovm.filters.vendor_id">
+							     <option value="">All</option>
+							    </select>
+							  </div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label>Rep</label>
+									<select class="form-control" ng-options="rep.id as rep.name for rep in ovm.data.reps"
+													style="width: 100%;" ng-model="ovm.filters.rep_id">
+										<option value="">All</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+							    <label>Results per page</label>
+							    <select  ng-options="o as o for o in [1,3,10,25,50,100]" class="form-control" 
+								  style="width: 100%;" ng-model="ovm.filters.results_per_page">
+							    </select>
+							  </div>
+							</div>
+          	</div>
+            <div class="row">
+	            <div class="col-sm-3 pull-right">
+		            <button class="btn btn-flat btn-primary btn-block" ng-click="ovm.newQuery()"><i class="fa fa-filter"></i> Filter</button>
+	            </div>
+            </div> 
+					</div><!--ibox-content-->
+			</div><!--ibox-->
+		</div><!--.row-->
+		
+		<div class="row">
+			<div class="ibox float-e-margins" ng-click="primaryBox=2" ng-class="{'ibox-primary':primaryBox==2}">
+				<div class="ibox-title">
+					<h3>Orders List</h3>
+				</div>
+				<div class="no-padding ibox-content">
+
+					<table ng-if="ovm.orders.length" class="table cft-table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Customer</th>
+								<th>E-Mail</th>
+								<th>Vendor</th>									
+								<th>Rep</th>
+								<th>Order Placed<sorter change="ovm.changeSort" orderby="ovm.filters.orderby" order="ovm.filters.order" column="'created_at'"></th>
+								<th>Order Status</th>
+								<th>Payment Status</th>
+								<th width=40>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="order in ovm.orders | limitTo : ovm.pagination.ordersPerPage : ovm.pagination.startIndex">
+
+								<td><strong><a ui-sref="orders.edit({orderId: order.id})">{{order.id}}</a></strong></td>
+								<td>{{order.user.first_name}} {{order.user.last_name}}</td>
+								<td>{{order.user.email}}</td>
+								<td>{{ovm.data.lookup("vendors", "id", order.vendor_id, "name") }}</td>
+								<td>{{ovm.data.lookup("reps", "id", order.rep_id, "name") }}</td>
+								<td>{{ovm.formatDate(order.created_at)}}</td>
+								<td><span class="label label-{{order.order_status_id}}">{{ovm.data.lookup("order_statuses", "id", order.order_status_id, "name") }}</span></td>
+								<td><span class="label label-payment-{{order.payment_status_id}}">{{ovm.data.lookup("payment_statuses", "id", order.payment_status_id, "label") }}</span></td>
+								<td><a href="#" class="warning" ng-click="ovm.deleteOrder(order.id)"><i class="fa fa-close"></i></a>
+							</tr>
+						</tbody>
+					</table>
+
+
+					<div class="pagination full-width text-center" width="100%" ng-if="ovm.pagination.next || ovm.pagination.prev">
+						<div class="btn-group">
+							<button ng-if="ovm.pagination.prev" ng-click="ovm.pagination.changePage('prev')" class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
+							<button ng-if="ovm.pagination.next" ng-click="ovm.pagination.changePage('next')"  class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i> </button>
+						</div>
+					</div>
+
+					<pagination total="ovm.pagination.total" current="ovm.pagination.current" change="ovm.changePage"></pagination>        	
+					
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>

@@ -1,0 +1,129 @@
+<div class="cart-header">
+  <img src="/images/bluedelta-logo-blue.jpg">
+</div>
+
+
+
+<div class="container pay-page page-container">
+
+  <!--Loading Divs-->
+  <div ng-if="!vm.user.loaded" class="pay-user-loading">
+    <p><i class="fa fa-spin fa-circle-o-notch"></i>&nbsp;&nbsp;Getting user data...</p>
+  </div>
+  <div ng-if="!vm.orderLoaded" class="pay-user-loading">
+    <p><i class="fa fa-spin fa-circle-o-notch"></i>&nbsp;&nbsp;Getting order data...</p>
+  </div>
+
+  <!--User Box-->
+  <div ng-show="vm.user.id" class="user-box clearfix">
+    <h5><i class="fa fa-user"></i> {{vm.user.first_name}} {{vm.user.last_name}}</h5>
+    <a class="btn btn-primary" ng-click="vm.logout()">Logout</a>
+  </div>
+
+  <!--Login Form-->
+  <div ng-if="!vm.userLoggedIn" class="pay-login-form">
+    <h3 class="popup-title">Login or Register to Continue</h3>
+    <div class="cft-g login-reg-grid">
+      <div class="cft-gi">
+        <h4>Log In</h4>
+        <login-form callback="vm.authCallback" redirect="NULL"></login-form>
+      </div><!--
+			--><div class="cft-gi">
+        <h4>Register</h4>
+        <register-form callback="vm.authCallback" redirect="NULL"></register-form>
+      </div>
+    </div>
+    <div class="message-block" ng-show="vm.messages.message">
+      <p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+    </div>
+  </div>
+
+  <div ng-if="vm.orderLoaded && vm.userLoggedIn ">
+    <!--Order Errors-->
+    <div class="order-errors" ng-if="vm.orderErr">
+      <h3>{{vm.orderErr}}</h3>
+      Try going back to your <a ng-href="/closet">closet</a>
+    </div>
+    <div ng-if="!vm.orderErr && vm.formStep==1 && vm.userLoggedIn" class="checkout-form">
+
+      <form novalidate class="cft-form checkout-form">
+        <!--Order Details-->
+        <div class="order-details">
+          <h1>
+            <span ng-if="vm.order.payment_status_id == 1" >Invoice</span>
+            <span ng-if="vm.order.payment_status_id != 1" >Receipt</span>
+            for Order #{{vm.order.id}}
+          </h1>
+          <hr>
+          <h3>Jean Name: {{vm.order.order_items[0].jean_name}}</h3>
+          <div class="cft-g order-detail-grid">
+            <div class="cft-gi">
+              <img ng-src="{{vm.order.order_items[0].jean_image_url}}">
+            </div><!--
+            --><div class="cft-gi">
+              <div class="jean-list invoice">
+                <jean-list jean="vm.order.order_items[0]"></jean-list>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Payment-->
+        <div class="payment-form-container" ng-if="vm.order.payment_status_id==1">
+          <hr>
+          <div class="cc-info-box">
+          <h3>Credit Card Information</h3>
+          <ul ng-show="!vm.cardForm.addingCard" class="card-list">
+            <li ng-if="vm.cardForm.loadingCards">Getting Credit Card Information...</li>
+            <li ng-repeat="cc in vm.cards">
+              <a href="" ng-click="vm.credit_card_id = cc.id" ng-class="{checked:vm.credit_card_id == cc.id}" class="check-box small"></a>
+              <label>
+                <span style="width:45px; display:inline-block; font-weight:700;">{{cc.brand}}</span> -
+                &nbsp;&nbsp;**** **** **** {{cc.last_4}}
+              </label>
+            </li>
+          </ul>
+
+          <div class="new-card-form" ng-show="vm.cardForm.addingCard">
+            <sq-payment-form
+              input-styles="vm.inputStyles"
+              external-control="vm.fire"
+              input-config-overrides="vm.inputConfigOverrides"
+              nonce-received-callback="vm.nonceReceived"></sq-payment-form>
+          </div>
+
+          <a href="" ng-if="!vm.cardForm.loadingCards" ng-click="vm.cardForm.addingCard = !vm.cardForm.addingCard">
+            <span ng-if="!vm.cardForm.addingCard" class="edit-existing">Add New Card</span>
+            <span ng-if="vm.cardForm.addingCard && vm.cards.length">Use Existing Card</span>
+          </a>
+
+        </div>
+        </div>
+
+        <hr>
+        <h3 class="price-display">
+          <span ng-if="vm.order.payment_status_id==1">Total:</span>
+          <span ng-if="vm.order.payment_status_id!=1 && vm.paidDate">Paid {{vm.paidDate | date:"shortDate"}}:</span>
+          <span class="total-price">${{vm.checkoutForm.price}}</span></h3>
+        <input type="hidden" ng-model="vm.checkoutForm.price">
+        <div ng-if="vm.order.payment_status_id==1" class="input-containers">
+
+          <div ng-if="vm.order.order_type_id==5 " class="disclaimer" ng-init="vm.agreed=false">
+            <p>This Jean will be an exact replica of your previous jean, in terms of measurements and all customization options. If you would like to change the jean in anyway, create a new jean in the <a href="/customizer">builder</a>, or copy a jean from your <a href="/closet">closet</a>.</p>
+            <a ng-class="{checked:vm.agreed}"
+               ng-click="vm.agreed=!vm.agreed" class="small check-box"></a> <strong ng-click="vm.agreed=!vm.agreed">I understand</strong>
+          </div>
+
+          <input type="submit" ng-if="!vm.cardForm.addingCard" ng-class="{disabled:!vm.credit_card_id || vm.order.order_type_id==5 && !vm.agreed}" class="btn" ng-click="vm.payInvoice(vm.credit_card_id)" value="Pay Invoice">
+          <input type="submit" ng-if="vm.cardForm.addingCard" class="btn" ng-click="vm.fire()" value="Pay Invoice">
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+</div><!--./page-container

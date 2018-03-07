@@ -1,0 +1,44 @@
+<div ng-include="'/customizer/inc.popups.html'"></div>
+
+<!--Pant Rendering-->
+<div class="builder__stage">
+	<image-stack></image-stack>
+</div>
+
+<!--Mobile Helper-->
+<div ng-init="vm.showMenu = false" class="builder__mobile-helper">
+	<a ng-click="vm.showMenu=!vm.showMenu" ng-class="(vm.showMenu ? 'closer' : '')" class="menu-icon">
+		<span class="bars">
+	</a>
+	<ul ng-class="(vm.showMenu ? 'show' : 'hide')" class="slide mobile-helper-options">
+		<li>
+			<a href="" ng-click="vm.builder.step=6; vm.builder.overviewOn=true">
+				<i class="fa fa-list-ul"></i>
+			</a>
+		</li>
+		<li>
+			<a href="">
+				<i class="fa fa-share" aria-hidden="true"></i>
+			</a>
+		</li>
+		<li>
+			<a href="">
+				<i class="fa fa-floppy-o"></i>
+			</a>
+		</li>
+		<li>
+			<a href="">
+				<i class="fa fa-shopping-cart"></i></a>
+		</li>
+	</ul>
+</div>
+
+<!--Controls Panel-->
+<div class="builder__control-panel-mobile">
+	<ng-include src="'/customizer/inc.control-panel.html'"></ng-include>
+</div>
+	
+
+
+
+

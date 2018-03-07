@@ -1,0 +1,8 @@
+<div class="jean-card">
+	<img ng-click="click(data)" ng-src="{{data.orderItems[0].jean.imageURL}}">
+	<div class="box-content">
+  	<h4 ng-click="click(order)">{{data.orderItems[0].jean.name}}</h4>
+		<h5>Status: {{order.status}}</h5>
+		<h5 ng-if="data.dueDate">EST ARRIVAL:<br><b>{{data.dueDate | date : "longDate" : "CST"}}</b></h5>
+	</div>
+</div>

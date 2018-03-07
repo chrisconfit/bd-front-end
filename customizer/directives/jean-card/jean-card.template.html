@@ -1,0 +1,7 @@
+<div class="jean-card">
+  <img ng-click="click(data)" ng-src="{{data.orderItems[0].jean.imageURL}}">
+	<div class="box-content">
+  	<h4 ng-click="click(data)">{{data.orderItems[0].jean.name}}</h4>
+		<h5>Born: {{data.dob | date : "longDate" : "CST" }}</h5>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+{
+	"id":1,
+	"name":"Chris LeFevre",
+	"phone":6625010265,
+	"email":"chris@confitdesign.com",
+	"square_id" : 13245,
+	"shipping_addresses":[
+		{
+			"street":"724 N. Jackson St.",
+			"street2":"",
+			"city":"Little Rock",
+			"state":"AR",
+			"zip":72205,
+			"main":1
+		},
+		{
+			"street":"68 Norfork Dr.",
+			"street2":"",
+			"city":"Maumelle",
+			"state":"AR",
+			"zip":72113,
+			"main":0
+		},
+		{
+			"street":"509 Amsterdam Ave NE",
+			"street2":"Apt 2",
+			"city":"Atlanta",
+			"state":"GA",
+			"zip":30306,
+			"main":0
+		}
+	],
+	"roles":["user"],
+	"jeans":[123134241,51614136,1436136135]
+}

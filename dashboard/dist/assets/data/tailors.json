@@ -1,0 +1,90 @@
+[
+	{
+		"id":1,
+		"location":"Baltimore, MD"
+	},
+	{
+		"id":2,
+		"location":"Birmingjam, AL"
+	},
+	{
+		"id":3,
+		"location":"Bowling Green, KY"
+	},
+	{
+		"id":4,
+		"location":"Charlotte, NC"
+	},
+	{
+		"id":5,
+		"location":"Chicago, IL"
+	},
+	{
+		"id":6,
+		"location":"Washington, D.C."
+	},
+	{
+		"id":7,
+		"location":"Cincinnati, OH"
+	},
+	{
+		"id":8,
+		"location":"Dallas, TX"
+	},
+	{
+		"id":9,
+		"location":"Dayton, OH"
+	},
+	{
+		"id":10,
+		"location":"Detroit, MI"
+	},
+	{
+		"id":11,
+		"location":"London, U.K."
+	},
+	{
+		"id":12,
+		"location":"Los Angeles, CA"
+	},
+	{
+		"id":13,
+		"location":"Louisville, KY"
+	},
+	{
+		"id":14,
+		"location":"Memphis, TN"
+	},
+	{
+		"id":15,
+		"location":"Raleigh, NC"
+	},
+	{
+		"id":16,
+		"location":"Richmond, VA"
+	},
+	{
+		"id":17,
+		"location":"San Francisco, CA"
+	},
+	{
+		"id":18,
+		"location":"Scottsdale, AZ"
+	},
+	{
+		"id":19,
+		"location":"St. Louis, MO"
+	},
+	{
+		"id":20,
+		"location":"St. Petersburg, FL"
+	},
+	{
+		"id":21,
+		"location":"Toronto, Canada"
+	},
+	{
+		"id":22,
+		"location":"Vancouver, B.C."
+	}
+]

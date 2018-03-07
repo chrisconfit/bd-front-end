@@ -1,0 +1,561 @@
+<div class="order-page orders-edit-page">
+	<toaster-container></toaster-container>
+	<div class="row wrapper border-bottom white-bg page-heading">
+
+		<div id="form-control-buttons" class="pull-right" style="margin-top:20px;">
+			<button ng-click="ovm.saveOrder()" class="btn btn-primary btn-success"><span ng-if="!ovm.newOrder">Save</span><span ng-if="ovm.newOrder">Create</span></button>&nbsp;&nbsp;
+			<button ng-click="ovm.reOrder()" ng-if="!ovm.newOrder" class="btn btn-primary btn-flat">Re-Order</button>&nbsp;&nbsp;
+			<button ng-click="ovm.deleteThisOrder()" ng-if="!ovm.newOrder" class="btn btn-primary btn-danger">Delete</button>
+		</div>
+		
+		<h1 ng-if="!ovm.newOrder">Order {{ovm.order.id}}</h1>
+		<h1 ng-if="ovm.newOrder">Create New Order</h1>
+	</div>              
+	<div class="wrapper wrapper-content">
+
+    <div class="row">	    
+			<form name="f.orderForm">
+
+	      <div class="col-md-3">
+
+	        <div class="ibox" ng-click="primaryBox=1" ng-class="{'ibox-primary':primaryBox==1}">
+
+						<div class="ibox-title">
+							<h3>Jean Name:
+								<span ng-if="!ovm.EditMode" ng-if="ovm.order.order_items[0].jean_name">{{ovm.order.order_items[0].jean_name}}</span>
+								<input type="text" ng-if="ovm.EditMode" style="width:100%; margin-top:5px;" class="form-control" ng-model="ovm.order.order_items[0].jean_name">
+							</h3>
+						</div>
+
+	          <div class="ibox-content ibox-profile">
+
+							<!--Jean thumbnial-->
+							<img ng-if="ovm.order.order_items[0].jean_image_url" width="100%" ng-src="{{ovm.order.order_items[0].jean_image_url}}">
+
+							<!--Add Client Button-->
+							<a ng-if="!ovm.orderUser" href="" ng-click="ovm.editUser()" class="btn btn-flat btn-primary btn-block">Add a Client</a>
+
+							<!--Order User Validation-->
+							<input type="hidden" name="user_id" ng-model="ovm.orderUser.id" required>
+							<small ng-show="f.orderForm.submitted && f.orderForm.user_id.$error.required" class="text-danger">Please Choose a Client</small>
+
+		          <ul ng-if="ovm.orderUser.id" class="list-group list-group-unbordered">
+	              <li class="list-group-item clearfix">
+	                <b>Customer</b>
+	                <div class="pull-right">
+	  	              <a ui-sref="clients.edit({clientId: ovm.orderUser.id})">{{ovm.orderUser.first_name}} {{ovm.orderUser.last_name}}</a>
+		                &nbsp;&nbsp;<a ng-click="ovm.editUser()"><i class="fa fa-edit"></i></a>
+	                </div>
+	              </li>
+	              <li class="list-group-item clearfix">
+	                <b>Email</b> <a href="mailto:{{ovm.orderUser.email}}" class="pull-right">{{ovm.orderUser.email}}</a>
+	              </li>
+	              <li class="list-group-item clearfix">
+
+	                <p><b>Shipping Address</b><a class="pull-right fa fa-edit" ng-click="ovm.editAddress('Shipping', 'fa-truck')" href="#"></a></p>
+	                <p ng-if="ovm.order.address">{{ovm.order.shipping_name}}<br ng-if="ovm.order.shipping_name">
+		                {{ovm.order.shipping_phone | tel}}<br ng-if="ovm.order.shipping_phone">
+		                {{ovm.order.address.address_line_1}}
+	                  {{ovm.order.address.address_line_2}}<br ng-if="ovm.order.address.addressLine2 && ovm.order.address.addressLine2!=''">
+	                  {{ovm.order.address.city}}, {{ovm.order.address.state}} {{ovm.order.address.zip}}</p>
+	                <a ng-if="!ovm.order.address" ng-click="ovm.editAddress('Shipping', 'fa-truck')" href="">Add Address</a>
+
+									<!--Address Validation-->
+	                <input type="hidden" ng-model="ovm.order.shipping_address_id" name="shipping_address_id" ng-required="ovm.newOrder">
+	                <br ng-if="ovm.newOrder && f.orderForm.submitted && f.orderForm.shipping_address_id.$error.required" >
+	                <small ng-show="f.orderForm.submitted && f.orderForm.shipping_address_id.$error.required" class="text-danger">Please Choose a Shipping Address</small>
+
+	              </li>
+								<li class="list-group-item clearfix">
+                  <div class="form-group">
+		                <label>Shipping Phone Number:</label>
+										<input type="text" class="form-control" style="width: 100%;" ng-model="ovm.order.shipping_phone" aria-invalid="false">
+		              </div>
+								</li>
+	              <!--<li class="list-group-item clearfix">
+	                <p><b>Billing Address</b><a class="pull-right fa fa-edit" ng-click="ovm.editAddress('Billing', 'fa-list')" href="#"></a></p>
+	                <p ng-if="ovm.billingSameAsShipping()">Same as Shipping Address</p>
+	                <p ng-if="!ovm.billingSameAsShipping()">{{ovm.order.billingAddress.addressLine1}}<br>
+	                  {{ovm.order.billingAddress.addressLine2}}<br ng-if="ovm.order.billingAddress.addressLine2.length">
+	                  {{ovm.order.billingAddress.city}}, {{ovm.order.billingAddress.state}} {{ovm.order.billingAddress.zip}}</p>
+	              </li>-->
+
+								<!--PAYMENT-->
+								<li ng-if="!ovm.newOrder" class="list-group-item clearfix">
+									<p><b>Payment Status</b></p>
+									<input type="hidden" name="payment_status_id" id="payment_status_id" ng-model="vm.order.payment_status_id">
+
+									<small ng-show="f.orderForm.submitted && f.orderForm.payment_status_id.$error.required" class="text-danger">Please Choose a Payment Method</small>
+									<p class="payment_class_{{ovm.order.payment_status_id}}">
+                    {{ovm.data.lookup("payment_statuses", "id", ovm.order.payment_status_id, "label")}}
+                    <span ng-if="ovm.order.payment_status_id==1&&!ovm.order.price" class="payment-message">To charge the client, first enter a price</span>
+                  </p>
+
+                  <div ng-if="ovm.order.payment_status_id==1 && ovm.order.price && ovm.order.price!='Please enter a valid price'">
+                    <a style="margin-bottom:5px" href="#" ng-click="ovm.sendInvoice()" class="btn btn-flat btn-primary"><b>Send Invoice</b></a>
+                    <a style="margin-bottom:5px" href="#" ng-click="ovm.keyinPayment()" class="btn btn-flat btn-primary btn-success"><b>Key In Payment</b></a>
+                    <a style="margin-bottom:5px" class="btn btn-primary btn-success" ng-if="ovm.squareLink" ng-href="{{ovm.squareLink}}">Swipe Card</a>
+                    <a style="margin-bottom:5px" href="#" ng-click="ovm.compOrder()" class="btn btn-flat btn-warning"><b>Comp Order</b></a>
+                  </div>
+								</li>
+
+	            </ul>
+	          </div>
+	          <!-- /.ibox-content -->
+	        </div>
+	        <!-- /.ibox -->
+	      </div><!-- /.col -->
+	
+	      <div class="col-md-9">
+	        <div class="row">
+						<div class="col-md-6">
+							<div class="ibox clearfix" ng-click="primaryBox=2" ng-class="{'ibox-primary':primaryBox==2}">
+								<div class="ibox-title">
+									<h3>
+										Jean Build {{ovm.data.genders}}
+										<div class="pull-right" ng-if="!ovm.newOrder">
+											<a ng-if="!ovm.EditMode" class="fa fa-edit" ng-click="ovm.beginJeanEdit()" href="#"></a>
+											<a ng-if="ovm.EditMode" class="fa fa-save" ng-click="ovm.saveOrder(); ovm.EditMode=false" href="#"></a>
+											<a ng-if="ovm.EditMode" class="fa fa-undo" ng-click="ovm.clearJeanEdit()" href="#"></a>
+										</div>
+									</h3> 
+								</div>
+								<div class="ibox-content">
+	                <ul class="list-group jean-list-edit list-group-unbordered">
+			              <li class="list-group-item clearfix">
+		                  <b>Gender</b>
+		                  <span ng-if="!ovm.EditMode" class="pull-right" ng-click="ovm.beginJeanEdit()">
+		                  	{{ovm.data.lookup("gender_options", "id", ovm.order.order_items[0].gender_option_id, "gender") }}
+		                  </span>
+		                  <select class="form-control pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-model="ovm.order.order_items[0].gender_option_id" 
+												ng-options="g.id as g.gender for g in ovm.data.gender_options">
+											</select>
+		                </li>
+		                <li class="list-group-item clearfix">
+		                  <b>Style</b> 
+		                  <span ng-click="ovm.beginJeanEdit()" ng-if="!ovm.EditMode" class="pull-right">
+		                  	{{ovm.data.lookup("style_options", "id", ovm.order.order_items[0].style_option_id, "name") }}
+		                  </span>
+		                  <select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-model="ovm.order.order_items[0].style_option_id"
+												ng-options="style.id as style.name for style in ovm.data.style_options">
+											</select>
+		                </li>
+		                <li class="list-group-item clearfix">
+		                  <b>Fabric</b> 
+		                  <span ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+		                  	{{ovm.data.lookup("fabrics", "id", ovm.order.order_items[0].fabric_id, "name") }}
+		                  </span>
+											<select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-options="fabric.id as ovm.fabric_list_item_name(fabric.id)
+															group by fabric.fabric_type
+															for fabric in
+												ovm.data.fabrics | orderBy:['-deleted_at','fabric_type']"
+												ng-model="ovm.order.order_items[0].fabric_id">
+											</select>
+		                </li>
+		                <li class="list-group-item clearfix">
+		                  <b>Top Thread</b> 
+		                  <span ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()"  class="pull-right">
+		                  	{{ovm.data.lookup("threads", "id", ovm.order.order_items[0].top_thread_id, "name") }}
+		                  </span>
+		                  <select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-options="thread.id as thread.name for thread in ovm.data.threads" 	
+												ng-model="ovm.order.order_items[0].top_thread_id">
+											</select>
+		                </li>
+		                <li class="list-group-item clearfix">
+		                  <b>Bottom Thread</b> 
+		                  <span ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+		                  	{{ovm.data.lookup("threads", "id", ovm.order.order_items[0].bottom_thread_id, "name") }}
+		                  </span>
+		                  <select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-options="thread.id as thread.name for thread in ovm.data.threads" 	
+												ng-model="ovm.order.order_items[0].bottom_thread_id">
+											</select>
+										</li>
+										<li class="list-group-item clearfix">
+		                  <b>Accent Thread</b> 
+		                  <span ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+		                  	{{ovm.data.lookup("threads", "id", ovm.order.order_items[0].accent_thread_id, "name") }}
+		                  </span>
+											<select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-options="thread.id as thread.name for thread in ovm.data.threads" 	
+												ng-model="ovm.order.order_items[0].accent_thread_id">
+											</select>
+		                </li>
+
+		                <li class="list-group-item clearfix">
+		                  <b>Desired Fit</b>
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].fit_option_id">
+			                  	{{ovm.data.lookup("fit_options", "id", ovm.order.order_items[0].fit_option_id, "name") }}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].fit_option_id" href="">Select</a>
+		                  </div>
+		                  <select ng-if="ovm.EditMode" class="form-control  pull-right" 
+			                  ng-model="ovm.order.order_items[0].fit_option_id"
+												ng-options="fit.id as fit.name for fit in ovm.data.fit_options">
+				                <option value="">None</option>
+											</select>
+		                </li>
+
+		                <li class="list-group-item clearfix">
+		                  <b>Rivets</b>
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].hardware_option_id">
+			                  	{{ovm.data.lookup("hardware_options", "id", ovm.order.order_items[0].hardware_option_id, "name")}}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].hardware_option_id" href="">Select</a>
+		                  </div>
+		                  <select ng-if="ovm.EditMode" class="form-control  pull-right"
+			                  ng-model="ovm.order.order_items[0].hardware_option_id"
+												ng-options="o.id as o.name for o in ovm.data.hardware_options">
+											</select>
+		                </li>
+
+		                <li class="list-group-item clearfix">
+		                  <b>Pocket Option</b>
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].pocket_option_id">
+			                  	{{ovm.data.lookup("pocket_options", "id", ovm.order.order_items[0].pocket_option_id, "label")}}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].pocket_option_id" href="">Select</a>
+		                  </div>
+		                  <select ng-if="ovm.EditMode" class="form-control  pull-right" 
+			                  ng-model="ovm.order.order_items[0].pocket_option_id"
+												ng-options="o.id as o.label for o in ovm.data.pocket_options">
+											</select>
+		                </li>
+
+		                <li class="list-group-item clearfix">
+		                  <b>Belt Loops</b>
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].belt_loop_option_id">
+			                  	{{ovm.data.lookup("belt_loop_options", "id", ovm.order.order_items[0].belt_loop_option_id, "label")}}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].belt_loop_option_id" href="">Select</a>
+		                  </div>
+		                  <select ng-if="ovm.EditMode" class="form-control pull-right"
+												ng-options="o.id as o.label for o in ovm.data.belt_loop_options"
+												ng-model="ovm.order.order_items[0].belt_loop_option_id">
+											</select>
+		                </li>
+		                
+		                <li class="list-group-item clearfix" >
+		                  <b>Monogram</b> 
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].monogram">
+			                  	{{ovm.order.order_items[0].monogram}}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].monogram" href="">Add</a>
+		                  </div>
+		                  <input type="text" ng-if="ovm.EditMode" style="width:200px;" maxlength="3" 
+		                  class="form-control pull-right" ng-model="ovm.order.order_items[0].monogram">
+		                </li>
+		                
+										<li class="list-group-item clearfix" ng-if="ovm.order.order_items[0].monogram">
+		                  <b>Monogram Stitch Color</b> 
+		                  <div ng-if="!ovm.EditMode" ng-click="ovm.beginJeanEdit()" class="pull-right">
+			                  <span ng-if="ovm.order.order_items[0].monogram_thread_id">
+			                  	{{ovm.data.lookup("threads", "id", ovm.order.order_items[0].monogram_thread_id, "name") }}
+			                  </span>
+			                  <a ng-if="!ovm.order.order_items[0].monogram_thread_id" href="">Select</a>
+		                  </div>
+											<select class="form-control  pull-right" 
+												ng-if="ovm.EditMode" 
+												ng-options="thread.id as thread.name for thread in ovm.data.threads" 	
+												ng-model="ovm.order.order_items[0].monogram_thread_id">
+											</select>
+										</li>
+											                
+		                <li class="list-group-item clearfix">
+		                  <b>Notes for Tailor</b>
+		                  <a ng-if="!ovm.EditMode && !ovm.order.order_items[0].notes" href="#" ng-click="ovm.beginJeanEdit()" class="pull-right">Add</a>
+		                  <a ng-if="!ovm.EditMode && ovm.order.order_items[0].notes" href="#" ng-click="ovm.beginJeanEdit()" class="pull-right">Edit</a>
+		                  <p ng-if="!ovm.EditMode && ovm.order.order_items[0].notes">{{ovm.order.order_items[0].notes}}</p>
+		                  <textarea class="form-control" ng-if="ovm.EditMode" ng-model="ovm.order.order_items[0].notes"></textarea>
+		                </li>
+		              </ul>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="ibox" ng-click="primaryBox=3" ng-class="{'ibox-primary':primaryBox==3}">
+								<div class="ibox-title with-border">
+									<h3>Order Info</h3>
+								</div>
+								<div class="ibox-content clearfix">
+									<div class="form-group">
+										<label class="control-label">Jean Price</label>
+	                  <div class="input-group">
+			                <span class="input-group-addon">$</span>
+			                <input type="text" class="form-control" ng-model="ovm.order.price" ng-blur="ovm.convertToCurrency()">
+			              </div>
+									</div>
+	                <div class="form-group">
+		                <label>Vendor</label>
+		                <select ng-model="ovm.order.vendor_id" class="form-control select2" style="width: 100%;"
+			                ng-options="vendor.id as vendor.name for vendor in ovm.data.vendors">
+		                </select>
+		              </div>
+	                <div class="form-group">
+		                <label>Rep</label>
+		                <select class="form-control select2" ng-model="ovm.order.rep_id" style="width: 100%;" 
+			              ng-options="rep.id as rep.name for rep in ovm.data.reps">
+		                </select>
+		              </div>
+		              <div class="form-group">
+		                <label>Order Type</label>
+		                <select class="form-control select2" ng-model="ovm.order.order_type_id" style="width: 100%;"
+										ng-options="type.id as type.name for type in ovm.data.order_types">
+	                	</select>
+		              </div>
+									<div ng-if="ovm.order.order_type_id==2	"class="form-group">
+										<label>Tailor Location</label>
+										<select class="form-control select2" ng-model="ovm.order.tailor_id" style="width: 100%;"
+														ng-options="t.id as t.city+', '+t.state for t in ovm.data.tailors">
+										</select>
+									</div>
+	                <div class="form-group">
+		                <label>Status</label>
+		                <select class="form-control select2" 
+		                ng-options="status.id as status.name for status in ovm.data.order_statuses"  
+			              ng-model="ovm.order.order_status_id" style="width: 100%;">
+		                </select>
+		              </div>	            
+	              	<div class="form-group">
+		                <label>Shipping Tracking Link:</label>
+										<input type="text" class="form-control" style="width: 100%;" ng-model="ovm.order.tracking">
+		              </div>
+		              <div class="row">
+		              	<div class="col-sm-6">
+			              	<div class="form-group">
+				                <label>Fitting Date:</label>
+				                <div class="input-group date">
+					                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+													<input type="datetime" class="form-control" ng-model="ovm.order.fit_date" date-time view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+												</div>
+				                <!-- /.input group -->
+				              </div>
+		              	</div>
+		              	<div class="col-sm-6">
+			              	<div class="form-group">
+				                <label>Due Date (DOB):</label>
+				                <div class="input-group date-edge-right date">
+					                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+													<input type="datetime" class="form-control" ng-model="ovm.order.due_date" date-time view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+												</div>
+				                <!-- /.input group -->
+				              </div>
+		              	</div>
+		              </div>
+							</div>
+							</div>	
+						</div>
+						
+	        </div>
+	      </div><!-- /.col -->
+	
+	    	<div class="col-md-9 timeline-measurements">
+	        <div class="tabs-container">
+	
+	          <uib-tabset active="'timeline'">
+	            <uib-tab index="timeline" active="true" ng-if="!ovm.newOrder" heading="Timeline">
+	              <div class="panel-body">
+	                
+	                <h3>Timeline</h3>
+									
+									<!--Timeline Form-->
+									<div class="form-group">
+									  <label class="control-label" for="order_id">Enter Note</label>
+									  <div class="input-group">
+									    <input type="text" class="form-control" ng-model="ovm.timelineForm.message" placeholder="Add Order Note">
+									    <span class="input-group-btn">
+									      <button type="button" ng-click="ovm.addTimelineItem()" class="btn btn-primary btn-flat">Add</button>
+									    </span>
+									  </div>
+									</div>
+									
+									<!--Timeline Display-->
+									<div id="vertical-timeline" class="vertical-container dark-timeline">
+										<div ng-repeat="t in ovm.timeline | orderBy: '-created_at'"class="vertical-timeline-block">
+											<div class="vertical-timeline-icon navy-bg">
+												<i class="fa fa-{{t.type || 'circle'}} bg-gray"></i>
+											</div>
+											<div class="vertical-timeline-content">
+												<h3 class="timeline-header no-border" ng-bind-html="t.message"></h3>
+												<span class="vertical-date"><span class="time"><i class="fa fa-clock-o"></i> </span> {{ovm.timeFromNow(t.created_at)}} <br/>
+													<small>{{ovm.formatDate(t.created_at)}}</small>
+													<small ng-if="t.user">&nbsp;&nbsp;<i class="fa fa-user"></i> {{t.user.first_name}} {{t.user.last_name}}</small>
+												</span>
+											</div>
+										</div>
+									</div>
+			              
+	              </div>
+	            </uib-tab>
+	            <uib-tab index="measurements" heading="Measurements">
+	              <div class="panel-body measurements">
+	                <h3>Waist</h3>   
+	                <div class="row">
+		               
+										<div class="col-sm-6">
+											<div class="form-group">
+										    <label class="control-label" for="customer">Waist</label>
+										    <input type="number" ng-model="ovm.order.order_items[0].waist" name="waist" id="waist" class="form-control">
+											</div>
+										</div>
+	                </div>
+	                <h3>Seat</h3>
+	                <div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Seat Down</label>
+												<input type="number" ng-model="ovm.order.order_items[0].seat_down" name="seat_down" id="seat_down" class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Seat Right</label>
+												<input type="number" ng-model="ovm.order.order_items[0].seat_right" name="seat_right" id="seat_right"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Rise</h3>
+	                <div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Rise</label>
+												<input type="number" ng-model="ovm.order.order_items[0].rise" name="rise" id="rise"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Full Rise</label>
+												<input type="number" ng-model="ovm.order.order_items[0].full_rise" name="full_rise" id="full_rise"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Thigh</h3>
+		              <div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Upper Down</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_upper_down" name="thigh_upper_down" id="thigh_upper_down"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Upper Circumference</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_upper_right" name="thigh_upper_right" id="thigh_upper_right"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Middle Down</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_middle_down" name="thigh_middle_down" id="thigh_middle_down"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Middle Circumference</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_middle_right" name="thigh_middle_right" id="thigh_middle_right"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Lower Down</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_lower_down" name="thigh_lower_down" id="thigh_lower_down"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Thigh Lower Circumference</label>
+												<input type="number" ng-model="ovm.order.order_items[0].thigh_lower_right" name="thigh_lower_right" id="thigh_lower_right"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Outseam</h3>
+		              <div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Outseam</label>
+												<input type="number" ng-model="ovm.order.order_items[0].outseam" name="outseam" id="outseam"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Knee</h3>
+		              <div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Knee Up</label>
+												<input type="number" ng-model="ovm.order.order_items[0].knee_up" name="knee_up" id="knee_up"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Knee Right</label>
+												<input type="number" ng-model="ovm.order.order_items[0].knee_right" name="knee_right" id="knee_right"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Calf</h3>
+		              <div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Calf Up</label>
+												<input type="number" ng-model="ovm.order.order_items[0].calf_up" name="calf_up" id="calf_up"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Calf Right</label>
+												<input type="number" ng-model="ovm.order.order_items[0].calf_right" name="calf_right" id="calf_right"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Opening</h3>
+		              <div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Leg Opening / Pant Bottom</label>
+												<input type="number" ng-model="ovm.order.order_items[0].leg_opening" name="leg_opening" id="leg_opening"  class="form-control">
+											</div>
+										</div>
+									</div>
+									<h3>Additional Info</h3>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Height</label>
+												<input type="number" ng-model="ovm.order.order_items[0].height" name="height" id="height"  class="form-control">
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+												<label class="control-label" for="customer">Weight</label>
+												<input type="number" ng-model="ovm.order.order_items[0].weight" name="weight" id="weight"  class="form-control">
+											</div>
+										</div>									
+									</div>
+	
+	              </div>   
+							</uib-tab>
+	          </uib-tabset>
+	
+	        </div>
+				</div><!-- /.col -->
+
+			</form>
+    </div><!-- /.row -->
+	</div>
+</div>

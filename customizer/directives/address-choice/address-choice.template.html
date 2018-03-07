@@ -1,0 +1,54 @@
+<div class="add-form">	
+	<div ng-if="!editing" ng-repeat="add in user.addresses | filter:{primary:'1'} | limitTo:1">
+		<span class='add-line'>{{add.address_line_1}}</span>
+		<span class='add-line' ng-if="add.address_line_2">{{add.address_line_2}}</span>
+		<span class='add-line'>{{add.city}}, {{add.state}} {{add.zip}}</span>
+		<a href="" ng-click="startEditing()" class="edit-existing">Change</a>
+	</div>
+	<a ng-if="!user.addresses.length && !active" ng-click="startEditing(); open();">Add a Shipping Address</a>
+
+	<div ng-if="editing">
+		
+		<div ng-if="!active" class="single-address" ng-repeat="add in user.addresses track by $index">
+			<a href="" ng-click="choosePrimary(add)" ng-class="{checked:add.primary>0}" class="check-box small"></a>
+			<span class='add-line'>{{add.address_line_1}}</span>
+			<span class='add-line' ng-if="add.address_line_2">{{add.address_line_2}}</span>
+			<span class='add-line'>{{add.city}}, {{add.state}} {{add.zip}}</span>
+			<div class="icon-controls">
+				<i ng-click="open($index)" class="fa fa-pencil"></i>
+				<i ng-if="user.addresses.length>1" ng-click="remove(add.id)" class="fa fa-minus-circle"></i>
+			</div>
+		</div>
+	
+		<a ng-if="!active" class="address-action-link" ng-click="open()" href="">Add Address <i class="fa fa-plus-circle"></i></a>						
+		<a ng-if="!active" class="address-action-link edit-existing" ng-click="stopEditing()" href="">Done</a>						
+	
+		<div ng-if="active" class="cft-form">
+			<div ng-class="{active: model.address_line_1.length}" class="input-group">
+		    <input type="text" class="form-control" id="addLine1" ng-model="model.address_line_1">
+		    <label for="addLine1">Address Line 1</label>
+		  </div>
+		  <div ng-class="{active: model.address_line_2.length}" class="input-group">
+		    <input type="text" class="form-control" id="addLine2" ng-model="model.address_line_2">
+		    <label for="addLine2">Address Line 2</label>
+		  </div>
+		  <div ng-class="{active: model.city.length}" class="input-group">
+		    <input type="text" class="form-control" id="city" ng-model="model.city">
+		    <label for="city">City</label>
+		  </div>
+		  <div ng-class="{active: model.state.length}" class="input-group">
+				<select class="form-control" id="state" ng-model="model.state">
+					<option ng-selected="!model.state" value="" disabled></option>
+					<option ng-repeat="state in states" ng-selected="model.state==state.abbreviation" value="{{state.abbreviation}}">{{state.name}}</option>
+				</select>
+		    <label for="state">State</label>
+		  </div>
+		  <div ng-class="{active: model.zip.length}" class="input-group">
+		    <input type="text" class="form-control" id="zip" ng-model="model.zip">
+		    <label for="zip">Zip</label>
+		  </div>
+		  <button ng-click="save()" class="btn">Save</button> <button ng-click="clear()" class="btn secondary">Close</button>
+		</div>
+		
+	</div>
+</div>

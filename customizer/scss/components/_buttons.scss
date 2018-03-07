@@ -1,0 +1,102 @@
+.btn,
+a.btn {
+	display: inline-block;
+	padding: 8px 26px;
+	margin: 0;
+	@include font-size(16, 24);
+	@include box-sizing(border-box);
+	font-weight: 500;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	cursor: pointer;
+	color: #fff;
+	border:none;
+	-webkit-user-select: none;
+	-moz-user-select:    none;
+	-ms-user-select:     none;
+	-o-user-select:      none;
+	user-select:         none;
+	-webkit-appearance: none;
+	-moz-transition:0.2s all ease-in; 
+	-webkit-transition:0.2s all ease-in; 
+	transition:0.2s all ease-in;
+	text-transform:uppercase;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+  &.small {
+    padding: 4px 12px;
+    @include font-size(14, 24);
+  }
+  &.grey {
+    background: #bdbdbd;
+    color: #282a2b;
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  // Set primary button colors - can override later
+  background-color: $colorBtnPrimary;
+
+  &:hover {
+    background-color: $colorBtnPrimaryHover;
+    color: #fff;
+  }
+
+  &:active {
+   background-color: $colorBtnPrimaryActive;
+   color: #fff;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: default;
+    color: $disabledBorder;
+    background-color: $disabledGrey;
+  }
+}
+.btn.ghost{
+	width:100%;
+	border:2px solid;
+	background:transparent;
+	color:#fff;
+	border-color: rgba(255,255,255,0.7);
+	color: rgba(255,255,255,0.9);
+	background: none;
+  &:hover {
+	  border-color: rgba(255,255,255,1);
+	  color: rgba(255,255,255,1);
+	  background: none;
+  }
+}
+
+.btn-secondary,
+a.btn-secondary {
+  @extend .btn;
+  background-color: $colorBtnSecondary;
+
+  &:hover {
+    background-color: $colorBtnSecondaryHover;
+    color: #fff;
+    text-decoration:none;
+  }
+
+  &:active {
+   background-color: $colorBtnSecondaryActive;
+   color: #fff;
+  }
+}
+
+// Force an input/button to look like a text link
+.text-link {
+  display: inline;
+  border: 0 none;
+  background: none;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+}
+

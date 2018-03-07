@@ -1,0 +1,207 @@
+<div ng-show="vm.popups.orderProfile" ng-click="vm.popups.orderProfile = false" class="popup-window">
+	<div class="popup-content" ng-click="$event.stopPropagation()">
+		<a class="popup-closer" href="" ng-click="vm.popups.orderProfile = false"></a>
+		<div class="popup-content-inner">
+			<div class="cft-g jean-profile-grid">
+				<!--
+				--><div class="cft-gi sidebar">
+					<div class="jean-card">
+						<img ng-src="{{vm.displayJean.jean_image_url}}">
+						<div class="box-content">
+
+							<!--Pay/Receipt-->
+							<button  ng-if="vm.displayOrder.payment_status_id != 3 && vm.displayOrder.price"
+							ng-click="vm.payInvoice(vm.displayOrder.id)" class="btn">
+								<span ng-if="vm.displayOrder.payment_status_id == 1">Pay Invoice</span>
+								<span ng-if="vm.displayOrder.payment_status_id == 2">See Receipt</span>
+							</button>
+
+							<!--New FM-->
+							<a ng-if="vm.displayOrder.order_type_id==3" class="btn" href="https://bluedeltajeans.com/fit-match">New Fit Match</a>
+
+							<!--Re Order-->
+							<button  ng-if="vm.displayOrder.order_type_id!=3 && vm.displayOrder.order_status_id < 5 && vm.displayOrder.price"
+											 ng-click="vm.reOrder(vm.displayOrder)" class="btn">Re-Order</button>
+							<p ng-if="vm.displayOrder.order_type_id!=3 && vm.displayOrder.order_status_id < 5 && vm.displayOrder.price" class="closet-instruction">Purchase an exact replica of your jean.</p>
+
+							<!--Copy-->
+							<button ng-if="vm.displayOrder.order_type_id!=3" ng-click="vm.copyJean(vm.displayJean)" class="btn">Copy</button>
+							<p ng-if="vm.displayOrder.order_type_id!=3" class="closet-instruction">Use this pattern as the starting point for a new jean.</p>
+						</div>				
+					</div>
+				</div><!--
+				--><div class="cft-gi main">
+					<div class="pop-group">
+						<div ng-init="vm.titleEdit=false" class="jean-profile-data">												
+							<h3 ng-if="!vm.titleEdit">
+								{{vm.displayJean.jean_name}}
+								<i ng-click="vm.titleEdit=true; vm.oldTitle=vm.displayJean.jean_name" class="fa fa-pencil"></i>
+							</h3>
+							<div class="input-group icon-control" ng-if="vm.titleEdit">
+								<input type="text" ng-model="vm.displayJean.jean_name">
+								<div class="icon-controls">
+									<i ng-click="vm.displayJean.jean_name=vm.oldTitle; vm.titleEdit=false;" class="fa fa-undo"></i>
+									<i ng-click="vm.changeOrderItemName(); vm.titleEdit=false;" class="fa fa-check"></i>
+								</div>
+							</div>
+							<div class="order-details">
+								<span class="order-id">Order#: {{vm.displayOrder.id}}</span>
+								<span ng-if="vm.displayOrder.order_status_id">Status: {{vm.data.lookup("order_statuses", "id", vm.displayOrder.order_status_id, "name")}}</span>
+								<span ng-if="vm.displayJean.due_date">Estimated Arrival: {{vm.displayJean.due_date}}</span>
+								<a ng-if="vm.displayOrder.tracking && vm.displayOrder.order_status_id!=0" class="btn small" target="_blank" href="{{vm.displayOrder.tracking}}">Track Order</a>
+							</div>
+						</div>
+					</div>
+					
+					<div class="pop-group">
+						<div class="jean-list closet">
+							<jean-list jean="vm.displayJean"></jean-list>						
+						</div>
+					</div>
+					<div class="pop-group">
+						<p>Contact us for any questions about your order <span ng-if="vm.displayOrder.order_type_id!=3">or alterations</span></p>
+						<a href="mailto:info@bluedeltajeans.com?&subject=Inquiry%20regarding%20Order#%20{{vm.displayOrder.id}}" class="btn">Contact</a>
+					</div>
+<!--
+					<div class="pop-group">
+						<form class="cft-form">
+							<div ng-class="{active: vm.displayOrder.order_items[0].notes.length}" class="input-group">
+								<textarea name="comments" ng-model="vm.displayOrder.order_items[0].notes"></textarea>
+								<label for="comments">Alterations/Comments</label>
+							</div>					
+							<button class="btn">Send</button>
+						</form>
+					</div>
+		-->			
+				</div>
+			</div>
+		</div><!--./popup-content-inner-->
+	</div>
+</div>
+
+
+
+
+
+<div ng-show="vm.popups.jeanProfile" ng-click="vm.popups.jeanProfile = false" class="popup-window">
+	<div class="popup-content" ng-click="$event.stopPropagation()">
+		<a class="popup-closer" href="" ng-click="vm.popups.jeanProfile = false"></a>
+		<div class="popup-content-inner">
+			
+			<div class="cft-g jean-profile-grid">
+				<div class="cft-gi main">
+					
+					<div ng-init="vm.titleEdit=false" class="jean-profile-data">							
+						jean:	{{vm.displayJean}}
+							<h3 ng-if="!vm.titleEdit">
+								{{vm.displayJean.name}}
+								<i ng-click="vm.titleEdit=true; vm.oldTitle=vm.displayJean.data.name" class="fa fa-pencil"></i>
+							</h3>	
+
+							<div class="input-group icon-control" ng-if="vm.titleEdit">
+								<input type="text" ng-model="vm.displayJean.name">
+								<div class="icon-controls">
+									<i ng-click="vm.displayJean.data.name=vm.oldTitle; vm.titleEdit=false;" class="fa fa-undo"></i>
+									<i ng-click="vm.titleEdit=false" class="fa fa-check"></i>
+								</div>
+							</div>
+						THIS ORDER: {{vm.displayOrder}}
+						<p>Status:{{vm.displayOrder.status}}</p>
+						<p>Estimated Arrival: {{vm.displayOrder.birthday}}</p>
+						<p>Order#: {{vm.displayOrder.id}}</p>
+					</div>
+					
+					<div class="jean-list closet">
+						<jean-list jean="vm.displayJean"></jean-list>						
+					</div>
+					
+					<label>Alterations/Comments</label>
+					<textarea></textarea>
+					
+					<button class="btn">Send</button>
+					
+				</div><!--
+				--><div class="cft-gi sidebar">
+					<div class="jean-card">
+						<img ng-src="/images/thumbnails/{{vm.displayJean.data.id}}.jpg">
+						<div class="box-content">
+							<button ng-if="vm.displayOrder.order_status_id < 5 && vm.displayOrder.price"
+								ng-click="vm.reOrder(vm.displayOrder.id)" class="btn">Re-Order</button>
+							<button ng-click="vm.copyJean(vm.displayJean)" class="btn">Copy</button>
+						</div>				
+					</div>
+				</div>
+			</div>
+		</div><!--./popup-content-inner-->
+	</div>
+</div>
+
+
+
+<div ng-show="vm.popups.editUser" ng-init="vm.form.user = vm.user" ng-click="vm.popups.editUser = false" class="popup-window">
+	<div class="popup-content" ng-click="$event.stopPropagation()">
+		<a class="popup-closer" href="" ng-click="vm.popups.editUser = false"></a>
+		<div class="popup-content-inner">
+		
+			<div class="pop-group user-form" ng-init="inputs = [{label:'First Name', field:'first_name'},{label:'Last Name', field:'last_name'},{label:'Email', field:'email'},{label:'Phone', field:'phone'}]">
+				
+				<h3>Basic Information</h3>
+							
+				<div class="input-container" ng-repeat="i in inputs">
+					<label class='fixed-width'>{{i.label}}:</label>
+					<span ng-if="!vm.userForm.editing[i.field]">
+						<span class="user-value editable" ng-if="vm.user[i.field]">
+							{{vm.user[i.field]}}
+							<i class="fa fa-pencil" ng-click="vm.userForm.editField([i.field])"></i>
+						</span>
+						<span ng-if="!vm.user[i.field]"  class="empty-value-button" ng-click="vm.userForm.editing[i.field]=true;">
+							Add {{i.label}} <i class="fa fa-add-plus-circle"></i>
+						</span>
+					</span>
+					<div class="input-group icon-control" ng-if="vm.userForm.editing[i.field]">
+						<input type="text" ng-model="vm.user[i.field]">
+						<div class="icon-controls">
+							<i class="fa fa-undo" ng-click="vm.userForm.cancel(i.field)"></i>
+							<i class="fa" ng-class="vm.userForm.saving[i.field] ? 'fa-circle-o-notch fa-spin' : 'fa-check' " ng-click="vm.userForm.save(i.field)"></i>
+						</div>
+					</div>
+				</div>
+				
+				<a href="" ng-if="!vm.passForm.editing" ng-click="vm.passForm.editing=true">Change Password</a>
+				<form class="cft-form" ng-if="vm.passForm.editing">
+					<div ng-class="{active: vm.passForm.currentPass.length}" class="input-group">
+						<input type="password" class="form-control" id="currentPass" ng-model="vm.passForm.currentPass">
+						<label for="currentPass">Current Password</label>
+					</div>
+					
+					<div ng-class="{active: vm.passForm.newPass.length}" class="input-group">
+						<input type="password" class="form-control" id="newPass" ng-model="vm.passForm.newPass">
+						<label for="newPass">New Password</label>
+					</div>
+					
+					<div ng-class="{active: vm.passForm.newPassConfirm.length}" class="input-group">
+						<input type="password" class="form-control" id="newPassConfirm" ng-model="vm.passForm.newPassConfirm">
+						<label for="newPassConfirm">Confirm New Password</label>
+					</div>
+					<button ng-click="vm.changePassword()"class="btn">Change Password</button> 	<button ng-click="vm.passForm.clear()" class="btn">Close</button>
+				</form>
+				
+										
+				<div class="message-block" ng-show="vm.messages.message">
+		  		<p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+				</div>
+				
+			</div>
+			
+			<h3>Shipping Address</h3>
+			
+			<div class="pop-group add-form">
+				<address-choice user="vm.user"></address-choice>
+			</div>
+			
+			
+			
+			
+		</div><!--./popup-content-inner-->
+	</div>
+</div>

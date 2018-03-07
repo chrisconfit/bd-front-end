@@ -1,0 +1,135 @@
+<div class="inmodal">
+	<div class="modal-header">
+	  <h4 class="modal-title"><i class="fa {{icon}}" aria-hidden="true"></i> {{addressType}} Address</h4>
+	  <small class="font-bold">Choose from the user's address below or enter a new address.</small>
+	</div>
+	
+	<div class="modal-body">
+		<div class="addresses">
+			<div class="single-address" ng-repeat="add in addresses track by $index">
+				<div class="radio radio-primary">
+			    <input type="radio" id="address_{{$index}}" id="name_{{$index}}"
+			    ng-value="add"  
+			    ng-model="newAdd.data"
+			    ng-click="newAdd.editing=false">
+			    <label for="address_{{$index}}"> 	
+			    	{{add.addressLine1}}
+						<br ng-if="add.addressLine2">{{add.addressLine2}}
+						<br>{{add.city}}, {{add.state}} {{add.zip}}
+					</label>
+				</div>
+				<hr>
+			</div>
+
+			
+			<div class="radio radio-primary">
+				<input name="newAdd_toggle" id="newAdd_toggle" type="radio"  
+				ng-value="newAdd.form"
+				ng-model="newAdd.data"
+				ng-click="newAdd.editing=true">
+			  <label for="newAdd_toggle">Add New Address</label>
+			</div>  
+				
+			
+			<div class="newAdd-form" ng-if="newAdd.editing">
+			  <form method="get" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Street 1</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newAdd.form.addressLine1" class="form-control">
+						</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Street 2</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newAdd.form.addressLine2" class="form-control">
+						</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">City</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newAdd.form.city" class="form-control">
+						</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">State</label>
+						<div class="col-sm-10">
+							<select ng-options="state.abbreviation as state.name for state in states" ng-model="newAdd.form.state" class="form-control"></select>
+						</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Zip</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newAdd.form.zip" class="form-control">
+						</div>
+          </div>
+			  </form>		  
+			</div>	
+				
+				
+		</div>
+	</div>
+	
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-white" ng-click="cancel()">Close</button>
+	    <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
+	</div>
+</div>
+
+
+
+<!--
+	<div class="add-form">	
+	<div ng-if="!editing" ng-repeat="add in user.address | filter:{primary:'true'} | limitTo:1">
+		<span class='add-line'>{{add.addressLine1}}</span>
+		<span class='add-line' ng-if="add.addressLine2">{{add.addressLine2}}</span>
+		<span class='add-line'>{{add.city}}, {{add.state}} {{add.zip}}</span>
+		<a href="" ng-click="startEditing()">Change</a>
+	</div>
+	<a ng-if="!user.address.length && !active" ng-click="startEditing(); open();">Add a Shipping Address</a>
+
+	<div ng-if="editing">
+		
+		<div ng-if="!active" class="single-address" ng-repeat="add in user.address track by $index">
+			<a href="" ng-click="choosePrimary($index)" ng-class="{checked:add.primary}" class="check-box small"></a>
+			<span class='add-line'>{{add.addressLine1}}</span>
+			<span class='add-line' ng-if="add.addressLine2">{{add.addressLine2}}</span>
+			<span class='add-line'>{{add.city}}, {{add.state}} {{add.zip}}</span>
+			<div class="icon-controls">
+				<i ng-click="open($index)" class="fa fa-pencil"></i>
+				<i ng-if="user.address.length>1" ng-click="remove($index)" class="fa fa-minus-circle"></i>
+			</div>
+		</div>
+	
+		<a ng-if="!active" class="address-action-link" ng-click="open()" href="">Add Address</a>						
+		<a ng-if="!active" class="address-action-link" ng-click="stopEditing()" href="">Done</a>						
+	
+		<form ng-if="active" class="cft-form">
+			<div ng-class="{active: model.addressLine1.length}" class="input-group">
+		    <input type="text" class="form-control" id="addLine1" ng-model="model.addressLine1">
+		    <label for="addLine1">Address Line 1</label>
+		  </div>
+		  <div ng-class="{active: model.addressLine2.length}" class="input-group">
+		    <input type="text" class="form-control" id="addLine2" ng-model="model.addressLine2">
+		    <label for="addLine2">Address Line 2</label>
+		  </div>
+		  <div ng-class="{active: model.city.length}" class="input-group">
+		    <input type="text" class="form-control" id="city" ng-model="model.city">
+		    <label for="city">City</label>
+		  </div>
+		  <div ng-class="{active: model.state.length}" class="input-group">
+				<select class="form-control" id="state" ng-model="model.state">
+					<option ng-selected="!model.state" value="" disabled></option>
+					<option ng-repeat="state in states" ng-selected="model.state==state.abbreviation" value="{{state.abbreviation}}">{{state.name}}</option>
+				</select>
+		    <label for="state">State</label>
+		  </div>
+		  <div ng-class="{active: model.zip.length}" class="input-group">
+		    <input type="text" class="form-control" id="zip" ng-model="model.zip">
+		    <label for="zip">Zip</label>
+		  </div>
+		  <button ng-click="save()" class="btn">Save</button><button ng-click="clear()" class="btn secondary">Close</button>
+		</form>
+		
+	</div>
+</div>-->

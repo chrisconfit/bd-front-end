@@ -1,0 +1,20 @@
+<div class="images" id="zoom-frame" ng-class="{'zoomed': isvm.zoom, 'centered':isvm.centerPan}" 
+	ng-click="isvm.toggleZoom()" ng-touch="isvm.zoom = !isvm.zoom" ng-mouseleave="isvm.returnPan()" ng-mousemove="isvm.trackMouse($event)">
+		<!--_s{{jeanData.style}} will add the current style to the jean, but for now all images are using the "2" style. Let's hardcode that until we need to change-->
+	<img crossorigin="Anonymous" class="zoomed-image" ng-if="jeanData.fabric_id" ng-class="{'zoom': isvm.zoom }"
+	ng-src="https://images.bluedeltajeans.com/images/components/fabrics/g{{jeanData.gender_option_id}}/s2/f{{jeanData.fabric_id}}.jpg">
+	<img crossorigin="Anonymous" class="zoomed-image" ng-if="jeanData.bottom_thread_id" ng-class="{'zoom': isvm.zoom }"
+	ng-src="https://images.bluedeltajeans.com/images/components/threads/g{{jeanData.gender_option_id}}/s2/tb/{{jeanData.bottom_thread_id}}.png">
+	<img crossorigin="Anonymous" class="zoomed-image" ng-if="jeanData.top_thread_id" ng-class="{'zoom': isvm.zoom }"
+	ng-src="https://images.bluedeltajeans.com/images/components/threads/g{{jeanData.gender_option_id}}/s2/tt/{{jeanData.top_thread_id}}.png">
+	<img crossorigin="Anonymous" class="zoomed-image" ng-if="jeanData.accent_thread_id" ng-class="{'zoom': isvm.zoom }"
+	ng-src="https://images.bluedeltajeans.com/images/components/threads/g{{jeanData.gender_option_id}}/s2/ta/{{jeanData.accent_thread_id}}.png">
+	<!--<img class="stage-button" ng-if="jeanData.hardware != 1"
+	src="/images/components/hardware/thumb_{{jeanData.hardware}}.jpg">-->
+</div>
+
+<a class="zoom-icon" ng-click="isvm.toggleZoom()" href="">
+	<i class="fa fa-search-plus" aria-hidden="true"></i>
+</a>
+</div>
+

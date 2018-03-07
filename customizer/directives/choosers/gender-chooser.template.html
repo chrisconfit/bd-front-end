@@ -1,0 +1,11 @@
+<h3>Choose a Gender</h3>
+
+<div class="cft-g chooser-grid" id="gender-chooser">
+	<span ng-class="{ live: chvm.jeanData.gender_option_id, active:active }" class="chooser-select" id="gender-selector"></span>
+	<div class="cft-gi" ng-repeat="data in dataset">
+		<a ng-class="{ active: chvm.jeanData.gender_option_id==data.id }" id="gender_{{data.id}}"
+		href="" ng-click="chvm.selectAttr($event, data.id, 'gender_option_id')">
+			<img ng-src="https://images.bluedeltajeans.com/images/components/gender/thumb_{{data.id}}.jpg">
+		</a>
+	</div>
+</div>

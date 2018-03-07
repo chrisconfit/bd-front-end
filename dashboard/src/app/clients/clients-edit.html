@@ -1,0 +1,192 @@
+<div class="clients-page clients-edit-page">
+	<toaster-container></toaster-container>
+
+	<div id="form-control-buttons" class="pull-right" style="margin-top:20px;">
+		<button ng-click="cvm.saveUser()" class="btn btn-primary btn-success"><span ng-if="!cvm.newUser">Save</span><span ng-if="cvm.newUser">Create</span></button>&nbsp;&nbsp;
+		<button ng-if="!cvm.newUser" ng-click="cvm.viewUserOrders(cvm.userData.id)" class="btn btn-primary btn-flat">View Client's Orders</button>&nbsp;&nbsp;
+	</div>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<h1 ng-if="!cvm.newUser">Edit User : {{cvm.userData.first_name}} {{cvm.userData.last_name}} - {{cvm.userData.id}}</h1>
+		<h1 ng-if="cvm.newUser">Create New User</h1>
+	</div>
+
+	<div class="wrapper wrapper-content">
+		<div class="row">
+			<form novalidate ng-submit="cvm.saveUser()" name="userDataForm">
+
+				<!--Basic info form-->
+				<div class="col-md-6">
+					<div class="ibox ibox-default">
+
+						<!--Box Title-->
+						<div class="ibox-title">
+							<h3>
+								Basic Information
+								<div ng-if="!cvm.newUser" class="pull-right">
+									<a ng-if="!cvm.clientEditMode" class="pull-right fa fa-edit" ng-click="cvm.beginClientEdit()" href="#"></a>
+									<a ng-if="cvm.clientEditMode" class="pull-right fa fa-save" ng-click="cvm.saveUser()" href="#"></a>
+									<a ng-if="cvm.clientEditMode" class="pull-right fa fa-undo" ng-click="cvm.clearClientEdit()" href="#"></a>
+								</div>
+							</h3>
+						</div>
+
+						<!--Box Content-->
+						<div class="ibox-content clearfix">
+
+							<ul class="list-group jean-list-edit list-group-unbordered">
+
+								<li class="list-group-item clearfix">
+									<b ng-if="!cvm.clientEditMode">Name</b>
+									<span ng-if="!cvm.clientEditMode" class="pull-right">{{cvm.userData.first_name}} {{cvm.userData.last_name}}</span>
+									<b ng-if="cvm.clientEditMode">First Name</b>
+									<input style="margin-top:5px" class="form-control" type="text" name="first_name" ng-if="cvm.clientEditMode" ng-model="cvm.userData.first_name" required>
+									<div ng-show="userDataForm.first_name.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.first_name.$error.required">Please Enter a First Name</small>
+									</div>
+									<b ng-if="cvm.clientEditMode">Last Name</b>
+									<input style="margin-top:5px" class="form-control" type="text" name="last_name" ng-if="cvm.clientEditMode" ng-model="cvm.userData.last_name" required>
+									<div ng-show="userDataForm.last_name.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.last_name.$error.required">Please Enter a Last Name</small>
+									</div>
+								</li>
+
+								<li class="list-group-item clearfix">
+									<b>E-mail</b>
+									<span ng-if="!cvm.clientEditMode" class="pull-right">{{cvm.userData.email}}</span>
+									<input style="margin-top:5px" class="form-control" type="text" name="email" ng-if="cvm.clientEditMode" ng-model="cvm.userData.email" required>
+									<div ng-show="userDataForm.email.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.email.$error.required">Please Enter an Email Address</small>
+									</div>
+								</li>
+
+								<li class="list-group-item clearfix">
+									<b>Phone</b>
+									<span ng-if="!cvm.clientEditMode" class="pull-right">{{cvm.userData.phone}}</span>
+									<input style="margin-top:5px" class="form-control" type="text" ng-if="cvm.clientEditMode" ng-model="cvm.userData.phone">
+								</li>
+
+								<li class="list-group-item clearfix">
+									<b>User Role</b>
+									<span ng-if="!cvm.clientEditMode" class="pull-right">{{cvm.userData.role_id}}</span>
+									<select class="form-control"
+											ng-if="cvm.clientEditMode"
+											ng-options="o.id as o.name for o in cvm.availableRoles"
+											ng-model="cvm.userData.role_id">
+									</select>
+								</li>
+
+								<li ng-if="cvm.newUser" class="list-group-item clearfix">
+									<b>Password</b>
+									<span ng-if="!cvm.clientEditMode" class="pull-right">{{cvm.userData.role_id}}</span>
+									<input style="margin-top:5px" class="form-control pull-right" type="password" name="password" ng-if="cvm.clientEditMode" ng-model="cvm.userData.password" required>
+									<div ng-show="userDataForm.password.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.password.$error.required">Please Enter a Password</small>
+									</div>
+								</li>
+
+							</ul>
+
+						</div>
+					</div>
+				</div>
+				<!--/Basic info form-->
+
+
+				<!--Address Form for new user-->
+				<div ng-if="cvm.newUser" ng-init="cvm.useAddress=false" class="col-md-6">
+					<div class="ibox ibox-default clearfix">
+						<div class="ibox-title">
+							<h3>Client Address</h3>
+							<a ng-if="!cvm.useAddress" ng-click="cvm.useAddress=true" href="">Add Address <i class="fa fa-plus-circle"></i></a>
+							<a ng-if="cvm.useAddress" ng-click="cvm.useAddress=false" href="">Remove Address <i class="fa fa-minus-circle"></i></a>
+						</div>
+						<div class="ibox-content">
+							<ul ng-if="cvm.useAddress" class="list-group list-group-unbordered">
+								<li class="list-group-item clearfix">
+									<b>Address Line 1</b>
+									<input style="margin-top:5px" class="form-control" type="text" name="address_line_1" ng-model="cvm.userData.create_addresses[0].address_line_1" required>
+									<div ng-show="userDataForm.address_line_1.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.address_line_1.$error.required">Please Enter an Address</small>
+									</div>
+								</li>
+								<li class="list-group-item clearfix">
+									<b>Address Line 2</b>
+									<input style="margin-top:5px" class="form-control" type="text" name="address_line_2" ng-model="cvm.userData.create_addresses[0].address_line_2">
+								</li>
+								<li class="list-group-item clearfix">
+									<b>City</b>
+									<input style="margin-top:5px" class="form-control" type="text" name="city" ng-model="cvm.userData.create_addresses[0].city" required>
+									<div ng-show="userDataForm.city.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.city.$error.required">Please Enter a City</small>
+									</div>
+								</li>
+								<li class="list-group-item clearfix">
+									<b>State</b>
+									<select ng-options="state.abbreviation as state.name for state in cvm.states" name="state" ng-model="cvm.userData.create_addresses[0].state" class="form-control" required></select>
+									<div ng-show="userDataForm.state.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.state.$error.required">Please Choose a State</small>
+									</div>
+								</li>
+								<li class="list-group-item clearfix">
+									<b>Zip</b>
+									<input style="margin-top:5px" class="form-control" type="text" ng-model="cvm.userData.create_addresses[0].zip" name="zip" required>
+									<div ng-show="userDataForm.zip.$invalid && userDataForm.submitted">
+										<small class="text-danger" ng-show="userDataForm.zip.$error.required">Please Enter a Zip Code</small>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!--Address / CC Chooser for existing user-->
+				<div ng-if="!cvm.newUser" class="col-md-6">
+
+					<div class="ibox ibox-default clearfix">
+						<div class="ibox-title">
+							<h3>
+								Address
+								<a class="pull-right fa fa-edit" ng-click="cvm.editAddress()" href="#"></a>
+							</h3>
+						</div>
+						<div class="ibox-content">
+							<div class="clearfix">
+								<p><b>Primary Address</b></p>
+								<p ng-repeat="add in cvm.userData.addresses | filter:{primary:'1'} | limitTo:1" ng-if="cvm.userData.addresses.length">{{add.address_line_1}}<br>
+									{{add.address_line_2}}<br ng-if="add.address_line_2.length">
+									{{add.city}}, {{add.state}} {{add.zip}}</p>
+								<a href="" ng-click="cvm.editAddress()" ng-if="!cvm.userData.addresses.length">Add an address</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="ibox ibox-default clearfix">
+						<div class="ibox-title">
+							<h3>Cards on File</h3>
+						</div>
+						<div class="ibox-content" ng-init="cvm.addingCard=false;">
+							<div class="clearfix">
+								<p ng-if="!cvm.cardsSearched">Looking for Credit Cards...</p>
+								<p ng-if="cvm.cardsSearched && cvm.userData.cards.length < 1">No Credit Cards on file.</p>
+								<p ng-if="!cvm.addingCard" ng-repeat="cc in cvm.userData.cards">
+									<span style="width:45px; display:inline-block; font-weight:700;">{{cc.brand | ccName}}</span> -
+									&nbsp;&nbsp;**** **** **** {{cc.last_4}}
+								</p>
+							</div>
+							<a href="" ng-click="cvm.addingCard=true" ng-if="!cvm.addingCard">Add a Credit Card</a>
+							<div ng-if="cvm.addingCard">
+								<sq-payment-form nonce-received-callback="cvm.createCreditCard"></sq-payment-form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</form>
+		</div><!-- /.row -->
+
+	</div>
+
+
+</div>

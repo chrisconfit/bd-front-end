@@ -1,0 +1,52 @@
+<div ng-if="(dataset | filter:{'fabric_type':'Raw Denim', 'deleted_at':null}).length">
+	<span ng-class="{ live: chvm.jeanData.fabric_id }" class="chooser-select" id="fabric_id-selector"></span>
+	<h3>Raw Denim <a href="" class="info-pop" ng-click="chvm.popups.rawDenim = !chvm.popups.rawDenim"><i class="fa fa-question-circle"></i></a></h3>
+	<div class="cft-g chooser-grid">
+		<div class="cft-gi" ng-repeat="fabric in dataset | filter:{'fabric_type':'Raw Denim', 'deleted_at':null} | orderBy:'weight'">
+			<a ng-class="{ active: chvm.jeanData.fabric==fabric }" id="fabric_id_{{fabric.id}}"
+			href="" ng-click="chvm.selectAttr($event, fabric.id, 'fabric_id')">
+				<img alt="{{fabric.name}}" ng-src="https://images.bluedeltajeans.com/images/components/fabrics/thumb/{{fabric.id}}.jpg">
+				<span class="fabric-weight">{{fabric.weight}}<span class="oz">oz</span></span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div ng-if="(dataset | filter:{'fabric_type':'Rinsed Denim', 'deleted_at':null}).length">
+	<h3>Rinsed Denim <a href="" class="info-pop" ng-click="chvm.popups.rinsedDenim = !chvm.popups.rinsedDenim"><i class="fa fa-question-circle"></i></a></h3>
+	<div class="cft-g chooser-grid">
+		<div class="cft-gi" ng-repeat="fabric in dataset | filter:{'fabric_type':'Rinsed Denim', 'deleted_at':null} | orderBy:'weight'">
+			<a ng-class="{ active: chvm.jeanData.fabric==fabric }" id="fabric_id_{{fabric.id}}"
+			href="" ng-click="chvm.selectAttr($event, fabric.id, 'fabric_id')">
+				<img alt="{{fabric.name}}"  ng-src="https://images.bluedeltajeans.com/images/components/fabrics/thumb/{{fabric.id}}.jpg">
+				<span class="fabric-weight">{{fabric.weight}}<span class="oz">oz</span></span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div ng-if="(dataset | filter:{'fabric_type':'Duck Canvas', 'deleted_at':null}).length">
+	<h3>Duck Canvas <a href="" class="info-pop" ng-click="chvm.popups.duckCanvas = !chvm.popups.duckCanvas"><i class="fa fa-question-circle"></i></a></h3>
+	<div class="cft-g chooser-grid">
+		<div class="cft-gi" ng-repeat="fabric in dataset | filter:{'fabric_type':'Duck Canvas', 'deleted_at':null} | orderBy:'weight'">
+			<a ng-class="{ active: chvm.jeanData.fabric==fabric }" id="fabric_id_{{fabric.id}}"
+			href="" ng-click="chvm.selectAttr($event, fabric.id, 'fabric_id')">
+				<img alt="{{fabric.name}}"  ng-src="https://images.bluedeltajeans.com/images/components/fabrics/thumb/{{fabric.id}}.jpg">
+				<span class="fabric-weight">{{fabric.weight}}<span class="oz">oz</span></span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div ng-if="(dataset | filter:{'fabric_type':'Holland & Sherry', 'deleted_at':null}).length">
+	<h3>Holland & Sherry <a href="" class="info-pop" ng-click="chvm.popups.hollandSherry = !chvm.popups.hollandSherry"><i class="fa fa-question-circle"></i></a></h3>
+	<div class="cft-g chooser-grid">
+		<div class="cft-gi" ng-repeat="fabric in dataset | filter:{'fabric_type':'Holland & Sherry','deleted_at':null} | orderBy:'weight'">
+			<a ng-class="{ active: chvm.jeanData.fabric==fabric }" id="fabric_id_{{fabric.id}}"
+			href="" ng-click="chvm.selectAttr($event, fabric.id, 'fabric_id')">
+				<img alt="{{fabric.name}}" ng-src="https://images.bluedeltajeans.com/images/components/fabrics/thumb/{{fabric.id}}.jpg">
+				<span class="fabric-weight">{{fabric.weight}}<span class="oz">oz</span></span>
+			</a>
+		</div>
+	</div>
+</div>

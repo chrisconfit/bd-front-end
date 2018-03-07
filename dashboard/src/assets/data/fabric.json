@@ -1,0 +1,155 @@
+[	
+	{
+		"fabricId":1004,
+		"name":" 8oz. Raw Denim Classic Indigo",
+		"weight":8,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1003,
+		"name":" 9.5oz. Raw Denim Dark Indigo",
+		"weight":9.5,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"Cotton/Poly/Spandex",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1002,
+		"name":" 10oz. Raw Denim Classic Indigo",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1001,
+		"name":" 12oz. Raw Denim Classic Indigo",
+		"weight":12,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1000,
+		"name":" 14oz. Raw Denim Classic Indigo",
+		"weight":14,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"Cotton/Poly/Spandex",
+		"supplier":"USA Milled by Cone"
+	},
+	{
+		"fabricId":1100,
+		"name":"11oz. Indigo Cast Gray",
+		"weight":11,
+		"description":"Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"96% Cotton / 4% Spandex",
+		"supplier":""
+	},
+	{
+		"fabricId":1101,
+		"name":" 8oz. Linen Gray",
+		"weight":8,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"50% Cotton / 40% Linen",
+		"supplier":""
+	},
+	{
+		"fabricId":1102,
+		"name":" 10.5oz. Natural Bull Denim",
+		"weight":10.5,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"91% Cotton / 7% Poly / 2% Spandex",
+		"supplier":""
+	},
+	{
+		"fabricId":1103,
+		"name":" 10oz. Raw Denim Light Indigo",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"99% Cotton / 1% Spandex",
+		"supplier":"USA Milled by Cone"
+	},
+	{
+		"fabricId":1104,
+		"name":" 8.5oz. Steel Gray",
+		"weight":8.5,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"90% Cotton / 5% Poly / 5% Spandex",
+		"supplier":""
+	},
+	{
+		"fabricId":1105,
+		"name":" 12oz. Broken Brown",
+		"weight":12,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"99% Cotton / 1% Spandex",
+		"supplier":""
+	},
+	{
+		"fabricId":1106,
+		"name":" 9oz. Slub Caramel",
+		"weight":9,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"90% Cotton / 8% Poly / 2% Spandex",
+		"supplier":null
+	},
+	{
+		"fabricId":1107,
+		"name":" 10oz. Blue on Black",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"Cotton/Poly/Spandex",
+		"supplier":"USA Milled by CONE"
+	},
+	{
+		"fabricId":1108,
+		"name":" 10oz. Raw Denim Super Black",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"75% Cotton / 25% Poly",
+		"supplier":"European Milled"
+	},
+	{
+		"fabricId":1109,
+		"name":" 10oz. Raw Denim Charcoal",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"96% Cotton / 4% Spandex",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1110,
+		"name":" 10oz. Raw Denim Powder Blue",
+		"weight":10,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"90% Cotton / 2% Spandex",
+		"supplier":"Italian Milled by Candiani"
+	},
+	{
+		"fabricId":1201,
+		"name":" 12oz. Duck Canvas Navy",
+		"weight":12,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1202,
+		"name":" 12oz. Duck Canvas Gray",
+		"weight":12,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	},
+	{
+		"fabricId":1203,
+		"name":" 12oz. Duck Canvas Olive",
+		"weight":12,
+		"description":"Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam fabricId dolor fabricId nibh ultricies vehicula ut fabricId elit. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.",
+		"materials":"100% Cotton",
+		"supplier":"USA Milled"
+	}
+]
+

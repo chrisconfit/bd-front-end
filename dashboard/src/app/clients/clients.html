@@ -1,0 +1,108 @@
+<div class="clients-page clients-edit-page" ng-controller="ClientsController as cvm">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<h2>Clients</h2>
+	</div>
+
+	<div class="wrapper wrapper-content animated fadeInRight">
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h3>Filters</h3>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-4">
+							  <div class="form-group">
+							    <label class="control-label" for="first_name">First Name</label>
+							    <input type="text" ng-model="cvm.filters.first_name" id="first_name" name="first_name" class="form-control">
+							  </div>
+							</div>
+							<div class="col-sm-4">
+							  <div class="form-group">
+							    <label class="control-label" for="first_name">Last Name</label>
+							    <input type="text" ng-model="cvm.filters.last_name" id="last_name" name="last_name" class="form-control">
+							  </div>
+							</div>        
+							<div class="col-sm-4">
+							  <div class="form-group">
+							    <label class="control-label" for="first_name">E-mail</label>
+							    <input type="text" ng-model="cvm.filters.email" id="email" name="email" class="form-control">
+							  </div>
+							</div>          
+						</div>
+	          <div class="row">
+							<div class="col-sm-4">
+							  <div class="form-group">
+							    <label class="control-label" for="city">City</label>
+							    <input type="text" ng-model="cvm.filters.city" id="city" name="city" class="form-control">
+							  </div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+							    <label>State</label>
+							    <select ng-options="o.abbreviation as o.name for o in cvm.states" class="form-control" style="width: 100%;" ng-model="cvm.filters.state">
+							    </select>
+							  </div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+							    <label>Results per page</label>
+							    <select ng-options="o as o for o in [1,3,10,25,50,100]" class="form-control" style="width: 100%;" ng-model="cvm.filters.results_per_page">
+							    </select>
+							  </div>
+							</div>
+	          </div>
+            <div class="row">
+	            <div class="col-sm-3 pull-right">
+		            <button class="btn btn-flat btn-primary btn-block" ng-click="cvm.newQuery()"><i class="fa fa-filter"></i> Filter</button>
+	            </div>
+            </div>    
+					</div><!--ibox-content-->
+				</div><!--ibox-->
+			</div>
+		</div><!--.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h3>Client list</h3>
+					</div>
+					<div class="no-padding ibox-content">
+						<table class="cft-table table table-hover">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>First Name<sorter change="cvm.changeSort" orderby="cvm.filters.orderby" order="cvm.filters.order" column="'first_name'"></sorter></th>
+									<th>Last Name<sorter change="cvm.changeSort" orderby="cvm.filters.orderby" order="cvm.filters.order" column="'last_name'"></sorter></th>
+									<th>Email<sorter change="cvm.changeSort" orderby="cvm.filters.orderby" order="cvm.filters.order" column="'email'"></sorter></th>									
+									<th>Phone Number</th>
+									<th>City</th>
+									<th>State</th>
+									<th width=40>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="user in cvm.users | limitTo : cvm.pagination.usersPerPage : cvm.pagination.startIndex">
+									<td><strong><a ui-sref="clients.edit({clientId: user.id})">{{user.id}}</a></strong></td>
+									<td>{{user.first_name}}</td>
+									<td>{{user.last_name}}</td>
+									<td>{{user.email}}</td>
+									<td>{{user.phone}}</td>
+									<td>{{user.address.city}}</td>
+									<td>{{user.address.state}}</td>
+									<td><a href="#" class="warning" ng-click="cvm.deleteUser(user.id)"><i class="fa fa-close"></i></a>
+								</tr>
+							</tbody>
+						</table>
+
+						<pagination total="cvm.pagination.total", current="cvm.pagination.current" change="cvm.changePage"></pagination>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

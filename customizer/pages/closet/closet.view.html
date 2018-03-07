@@ -1,0 +1,116 @@
+<navigation></navigation>
+<ng-include  src="'/pages/closet/popups.html'"></ng-include>
+
+<div class="banner-title closet">
+	<h1>My Closet</h1>
+</div>
+
+<div class="container page-container">
+  <div class="cft-g page-grid">
+	  
+    <div class="cft-gi main">
+
+      <div class="jean-closet">	      
+	      
+	      <!--Bespoke-->
+	      <div ng-if="(vm.orders | filter:{ order_type_id: '!3' }).length" class="bespoke">
+		      <h3>Bespoke Jeans</h3>
+		      <div class="cft-g order-grid">
+			      <div ng-repeat="order in vm.orders | filter:{ order_type_id: '!3'  }" class="cft-gi">
+				      <div class="jean-card jean-order-card">
+					      <div class="jean-image-order-preview">
+						      <img ng-click="vm.selectOrder(order)" ng-src="{{order.order_items[0].jean_image_url}}">
+					      </div>
+								<div class="box-content">
+						     	<h3 ng-click="vm.selectOrder(order)">{{order.order_items[0].jean_name}}</h3>
+									<h5>Status: {{vm.data.lookup("order_statuses", "id", order.order_status_id, "name")}}</h5>
+									<h5 ng-if="order.due_date">EST ARRIVAL: <b>{{order.due_date}}</b></h5>
+									<div class="jean-list closet">
+										<jean-list fields="['fabric_id','fabric_type', 'top_thread_id', 'bottom_thread_id', 'accent_thread_id']"
+										jean="order.order_items[0]"></jean-list>
+									</div>
+								</div>
+				      </div>
+			      </div>
+		      </div>
+	      </div>
+	      
+	      <!--Fit Match-->
+	      <div ng-if="(vm.orders | filter:{ order_type_id: '3'  }).length" class="fitmatch">
+		      <h3>My Fit Match Jeans</h3>
+		      <div class="cft-g order-grid">
+			      <div ng-repeat="order in vm.orders | filter:{ order_type_id: '3'  }" class="cft-gi">
+							<div class="jean-card jean-order-card">
+								<div class="jean-image-order-preview">
+									<img ng-click="vm.selectOrder(order)" ng-src="{{order.order_items[0].jean_image_url}}">
+								</div>
+								<div class="box-content">
+									<h3 ng-click="vm.selectOrder(order)">{{order.order_items[0].jean_name}}</h3>
+									<h5>Status: {{vm.data.lookup("order_statuses", "id", order.order_status_id, "name")}}</h5>
+									<h5>EST ARRIVAL: <b>{{order.due_date}}</b></h5>
+									<div class="jean-list closet">
+										<jean-list fields="['fabric_id','fabric_type', 'top_thread_id', 'bottom_thread_id', 'accent_thread_id']"
+										jean="order.order_items[0]"></jean-list>
+									</div>
+								</div>
+							</div>
+			      </div>
+		      </div>
+	      </div>
+
+	      <!--Saved-->
+				<div ng-if="(vm.jeans | filter:{ ordered : '!true' }).length" class="saved">
+		      <h3>Saved For Later</h3>
+		      <div class="cft-g jean-grid">
+			      <div ng-repeat="jean in vm.jeans | filter:{ ordered : '!true' }" class="cft-gi">
+				      <div class="jean-card">
+					      <img ng-src="{{jean.image_url}}">
+								<div class="box-content">
+									<h4>{{jean.name}}</h4>
+									<div ng-if="!jean.deleting">
+										<a href="/customizer/{{jean.id}}">Edit</a> | <a href="" ng-click="vm.orderJean(jean.id)">Order</a> | <a ng-click="jean.deleting=true" href="">Delete</a> 
+									</div>
+									<p class="delete-jean" ng-if="jean.deleting">Delete this jean? <br><a ng-click="vm.deleteJean(jean.id)" href="">Yes</a> | <a href="" ng-click="jean.deleting=false">No</a></p>
+								</div>
+				      </div>
+			      </div>
+		      </div>
+	      </div>
+	      
+	      <!--No Jeans-->
+	      <div class="no-jeans"
+				ng-if="(vm.orders | filter:{ order_type_id: '!3' }).length == 0 &&
+				(vm.jeans | filter:{ ordered : '!true' }).length==0 &&
+				(vm.orders | filter:{ order_type_id: '3'  }).length == 0">
+				  <h3>You don't have any Blue Delta Jeans yet. Why don't you <a href="/customizer">Build Some?</a></h3>
+					<p>If you have ordered jeans in the past and do not see them in your closet, please <a href="mailto:info@bluedeltajeans.com">contact us</a></p>
+	      </div>
+	      
+      </div><!--/.jean-closet-->
+      
+    </div><!--/.main
+    
+    --><div class="cft-gi sidebar">
+	    <div class="user-card">
+		    <h3 class="box-title">Your Profile</h3>
+		    <div class="box-content">
+			    <h4>{{vm.user.first_name}} {{vm.user.last_name}}</h4>
+			    <h5 ng-repeat="add in vm.user.addresses | filter:{primary:'1'} | limitTo:1">{{add.city}}, {{add.state}}</h5>
+			    <p>{{vm.user.email}}</p>
+			    <a ng-click="vm.popups.editUser=true" href="">Edit Account info <i class="fa fa-edit"></i></a>
+		    </div>
+		    
+		    <div class="user-stats" ng-init="famDate = (vm.orders | filter:{ order_status_id: '!1' } | limitTo: 1)[0].created_at">
+			    <h4 ng-if="(vm.orders | filter:{ order_status_id: '!1' } ).length">BDJ Family Member Since <br>{{vm.formatDate((vm.orders | filter:{ order_status_id: '!1' } | limitTo: 1)[0].created_at, "MMM, y")}}</h4>
+			    <div class="box-content">
+				    <span>Bespoke Jeans: <strong>{{(vm.orders | filter:{ order_type_id: '!3' }).length}}</strong></span>
+				    <span>Fit Match Jeans: <strong>{{(vm.orders | filter:{ order_type_id: '3' }).length}}</strong></span>
+				    <span>Jeans Saved: <strong>{{(vm.jeans | filter:{ ordered : '!true' }).length}}</strong></span>
+			    </div>
+		    </div>
+		    
+	    </div>
+    </div><!--/.sidebar-->
+    
+  </div><!--.page-grid-->
+</div><!--./page-container

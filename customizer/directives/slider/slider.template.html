@@ -1,0 +1,11 @@
+<div class="image-slider" ng-class="(imagesLoaded ? 'loaded' : 'loading')">
+	<div class="image-container">
+		<img ng-class="(isCurrentSlideIndex($index) ? 'active' : '')"
+				 ng-repeat="s in slides track by $index" 
+				 ng-click="imageClick()" 
+				 src="{{s}}" class="slide fade"
+				 ng-show="isCurrentSlideIndex($index)" >
+	</div>		 
+	<span ng-click="prevSlide()"   class="arrow-controls left-arrow"><i class="fa fa-angle-left"></i></span>
+	<span ng-click="nextSlide()" class="arrow-controls right-arrow"><i class="fa fa-angle-right"></i></span>
+</div>

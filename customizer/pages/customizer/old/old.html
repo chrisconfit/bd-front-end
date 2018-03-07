@@ -1,0 +1,17 @@
+
+<div class="button-container">
+	<div class="step-buttons">
+		<a class="btn"
+		ng-class="vm.jean.step=='1' ? 'acitve' : 'inactive'" 
+		ng-click="vm.jean.step = 1"
+		href=""><p>{{vm.form.steps[1].title}}</p></a><!--
+		--><a class="btn"
+		ng-class="vm.jean.step=='2' ? 'acitve' : (vm.jean.data.gender ? 'inactive' : 'disabled')" 
+		ng-click="vm.jean.step = 2"
+		href=""><p>{{vm.form.steps[2].title}}</p></a><!--
+		--><a class="btn"
+		ng-class="vm.jean.step=='3' ? 'acitve' : (vm.jean.data.gender && vm.jean.style ? 'inactive' : 'disabled')" 
+		ng-click="vm.jean.step = 3"
+		href=""><p>{{vm.form.steps[3].title}}</p></a>
+	</div>
+</div>

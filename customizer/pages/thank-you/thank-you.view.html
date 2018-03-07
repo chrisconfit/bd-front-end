@@ -1,0 +1,28 @@
+<div class="cart-header">
+  <img src="/images/bluedelta-logo-blue.jpg">
+</div>
+
+<div class="container pay-page page-container">
+  <!--User Box-->
+  <div ng-show="vm.user.id" class="user-box clearfix">
+    <h5><i class="fa fa-user"></i> {{vm.user.first_name}} {{vm.user.last_name}}</h5>
+    <a class="btn btn-primary" ng-click="vm.logout()">Logout</a>
+  </div>
+
+  <div ng-if="vm.type=='order'">
+    <div class="container thin">
+      <h2>Thanks for your payment!</h2>
+      <p>You will receive confirmation via email shortly. Now that you've paid you can always come back to this page to view your receipt.</p>
+      <a href="/closet">Back to your closet.</a>
+    </div>
+  </div>
+
+  <div ng-if="vm.type=='fitmatch'">
+    <div class="container thin">
+      <h2>Thanks!</h2>
+      <p>Your fit match package is on its way! Expect a 3-5 day delivery time inside the continental United States.</p>
+      <a href="/closet">Back to your closet.</a>
+    </div>
+  </div>
+
+</div><!--./page-container

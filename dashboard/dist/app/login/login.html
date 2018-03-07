@@ -1,0 +1,37 @@
+
+<div ng-controller="LoginController as logvm" class="middle-box text-center loginscreen  animated fadeInDown">
+	<div>
+	    <div><img width="100%" src="assets/images/bd-logo.png"></div>
+	    
+	    
+
+        <form role="form" name="signup_form" novalidate ng-submit="logvm.signupForm(signup_form)">
+       
+        <div class="form-group">
+          <input type="email" placeholder="Enter email" class="form-control" name="email" ng-model="logvm.email" required>
+          <div class="m-t-xs" ng-show="signup_form.email.$invalid && signup_form.submitted">
+            <small class="text-danger" ng-show="signup_form.email.$error.required">Please enter your email address</small>    
+            <small class="text-danger" ng-show="signup_form.email.$error.email">Please enter a valid email address</small>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" name="password" ng-model="logvm.password" required>
+          <div class="m-t-xs" ng-show="signup_form.password.$invalid && signup_form.submitted">
+          	<small class="text-danger" ng-show="signup_form.email.$error.required">Please enter a password</small>    
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+        
+        <!--<a ui-sref="forgot_password"><small>Forgot password?</small></a>-->
+        
+	    </form>
+	    <div ng-show="logvm.msg.message" class="login-message alert {{logvm.msg.type}}">{{logvm.msg.message}}</p>
+	    
+	</div>
+	</div>
+	
+	
+	
+	

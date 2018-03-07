@@ -1,0 +1,219 @@
+/*
+ *
+ *   INSPINIA - Responsive Admin Theme
+ *   version 2.7.1
+ *
+*/
+
+// Google Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+// Variables, Mixins
+@import "variables.less";
+@import "mixins.less";
+
+// INSPINIA Theme Elements
+@import "typography.less";
+@import "navigation.less";
+@import "top_navigation.less";
+@import "buttons.less";
+@import "badget_labels.less";
+@import "elements.less";
+@import "sidebar.less";
+@import "base.less";
+@import "pages.less";
+@import "chat.less";
+@import "metismenu.less";
+@import "spinners.less";
+
+// Landing page styles
+@import "landing.less";
+
+// RTL Support
+@import "rtl.less";
+
+// For demo only - config box style
+@import "theme-config.less";
+
+// INSPINIA Skins
+@import "skins.less";
+@import "md-skin.less";
+
+// Media query style
+@import "media.less";
+
+// Custom style
+// Your custom style to override base style
+@import "custom.less";
+
+// Clear layout on print mode
+@media print {
+  nav.navbar-static-side {
+    display: none;
+  }
+
+  body { overflow: visible !important; }
+
+  #page-wrapper {
+    margin: 0;
+  }
+}
+
+.jean-list-edit{
+	select.form-control.pull-right{
+		width:200px;	
+	}
+	textarea{
+		min-height:150px;
+	}
+}
+
+.search-form-container{
+	max-height: 400px;
+	max-height: 50vh;
+	overflow:auto;
+}
+//Add users widget
+.search-form-container .row{
+	padding-right:55px;
+	position:relative;
+	button{
+		position:absolute;
+		right:15px;
+	}
+}
+
+
+//Clients
+.cft-table{
+	th{
+		position:relative;
+		span.sorter{
+			position: absolute;
+			right: 6px;
+			width: 20px;
+			height: 23px;
+			top: 4px;
+			i{
+				outline:none;
+				cursor: pointer;
+				position:absolute;
+				right:0;
+				&.fa-angle-up{top:0;}
+				&.fa-angle-down{bottom:0;}
+				&.active{color:@blue;}
+			}
+
+		}
+	}
+}
+
+/*
+STATUS	
+1	complete/shipped
+2	on hold
+3	In production
+4	ordered
+
+5	New
+
+*/
+.label.label-1{
+	background:#bdbdbd;
+}
+.label.label-2{
+	color:#fff;
+	background: #bd001c;
+}
+.label.label-3{
+	color:#fff;
+	background:#5aaac7;
+}
+.label.label-4{
+	color:#fff;
+	background:#004964;
+}
+
+.label.label-5{
+	color:#fff;
+	background:#34d289;
+}
+
+/*fit match labels*/
+
+.label.label-Order-Placed{
+	background:#bdbdbd;
+}
+.label.label-Requested{
+	color:#fff;
+	background:#34d289;
+}
+.label.label-Form-Received{
+	color:#fff;
+	background:#004964;
+}
+
+.label.label-Shipped{
+	color:#fff;
+	background:#5aaac7;
+}
+
+.pagination{
+  	margin: 20px auto;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+.elips-start-btn{
+	margin-right:40px;
+	&:after{
+		content: "...";
+		position: absolute;
+		right: -26px;
+		bottom: -4px;
+	}	
+}
+
+.elips-end-btn{
+	margin-left:40px!important;
+	&:after{
+		content: "...";
+		position: absolute;
+		left: -26px;
+		bottom: -4px;
+	}	
+}
+
+.timeline-measurements {
+	@media (min-width: 768px) {
+		float: right;
+	}
+}
+
+.measurements {
+	h3 {
+		font-size: 20px;
+		font-weight: 400;
+		text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #106a8a;
+    margin-bottom: 15px;
+	}
+	label {
+		font-size: 14px;
+	}
+	.row {
+		border-bottom: 1px solid #e7eaec;
+		margin-bottom: 15px;
+	}
+	.form-group {
+    margin-bottom: 20px;
+	}
+}
+.payment-message {
+	display: block;
+	margin-top: 10px;
+	font-style: italic;
+  color: grey;
+  font-size: 14px;
+}

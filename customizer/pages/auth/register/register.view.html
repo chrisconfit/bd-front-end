@@ -1,0 +1,42 @@
+<navigation></navigation>
+
+<div class="page-container container">
+  
+  <div class="page-title">
+	  <h1>Register</h1>
+  </div>
+  
+  <div class="cft-g form-container-grid">
+	  
+	  <div class="cft-gi">
+		  
+
+				<p class="lead">Already a member? Please <a href="login">log in</a> instead.</p>
+				<register-form></register-form>
+
+<!--  
+		  <div class="step-2" ng-if="vm.formStep == 2">
+			  <p class="lead">A confirmation code has been sent to {{vm.credentials.email}}. Enter the code below to confirm your account.</p>
+		  	<form class="cft-form confirm-form" ng-if="vm.formStep == 2" ng-submit="vm.confirmUser()">	  
+			    <div ng-class="{active: vm.credentials.code.length}" class="input-group">
+			      <input type="text" class="form-control" id="confirm" placeholder="Enter your confirmation code" ng-model="vm.credentials.code">
+			      <label for="code">Confirmation Code</label>
+			    </div>
+
+			    <button type="submit" class="btn btn-default">Confirm!</button>
+					<a class="resend-code-link" href="" ng-click="vm.resendCode()">Resend Confirmation Code</a>
+			  </form>  
+		  </div>		
+-->
+
+		  
+	  </div><!--
+		  
+		--><div class="cft-gi">
+		  <div class="message-block" ng-show="vm.messages.message">
+		  	<p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+			</div>
+		</div>
+		
+  </div>
+</div>

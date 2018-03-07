@@ -1,0 +1,50 @@
+[
+	{
+	  "name":"Straight",
+	  "id" : 1,
+	  "images_1" : [
+			"/images/styles/straight-1.jpg",
+			"/images/styles/straight-2.jpg",
+			"/images/styles/straight-3.jpg"
+	  ],
+	  "images_2": [
+			"/images/styles/f-straight-1.jpg",
+			"/images/styles/f-straight-2.jpg",
+			"/images/styles/f-straight-3.jpg"
+    ]
+	},
+  {
+		"name":"Bootcut",
+		"id" : 2,
+    "images_1" : [
+			"/images/styles/bootcut-1.jpg",
+			"/images/styles/bootcut-2.jpg",
+			"/images/styles/bootcut-3.jpg"
+    ],
+    "images_2": [
+			"/images/styles/f-boot-1.jpg",
+			"/images/styles/f-boot-2.jpg",
+			"/images/styles/f-boot-3.jpg"
+    ]
+  },
+  {
+    "name":"Skinny",
+    "id":3,
+    "images_1" : [
+			"/images/styles/skinny-1.jpg",
+			"/images/styles/skinny-2.jpg",
+			"/images/styles/skinny-3.jpg"
+    ],
+    "images_2":false
+  },
+  {
+    "name":"Cigarette",
+    "id":4,
+    "images_1":false,
+    "images_2" : [
+			"/images/styles/cig-1.jpg",
+			"/images/styles/cig-2.jpg",
+			"/images/styles/cig-3.jpg"
+    ]
+  }
+]

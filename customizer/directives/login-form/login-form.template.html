@@ -1,0 +1,49 @@
+<form novalidate class="cft-form login-form" >
+	
+	<p ng-if="logvm.forgotPassword && !logvm.forgotPassword2 &&!logvm.customerReset">Enter your email address to reset your password</p>
+	<p ng-if="logvm.forgotPassword && !logvm.forgotPassword2 && logvm.customerReset">Enter your email address to set up your account. You will receive a verification code that you can use to create your new password.</p>
+	<p ng-if="logvm.forgotPassword2">Check your email for your verification code. Enter it below and choose a new password.</p>
+  <div ng-class="{active: logvm.credentials.loginEmail.length}" class="input-group">
+    <input type="text" class="form-control" id="loginEmail" ng-model="logvm.credentials.loginEmail">
+    <label for="email">Email address</label>
+  </div>
+
+  <div ng-if="!logvm.forgotPassword" ng-class="{active: logvm.credentials.loginPassword.length}" class="input-group">
+    <input type="password" class="form-control" id="loginPassword" ng-model="logvm.credentials.loginPassword">
+    <label for="password">Password</label>
+  </div>
+  
+  <div ng-if="!logvm.forgotPassword" class="login-actions">
+	  <button type="submit" ng-click="logvm.login(logvm.credentials.loginEmail, logvm.credentials.loginPassword)" class="btn btn-default">Sign in!</button>
+<!--<button ng-click="logvm.loginFB()" class="btn">Log In with&nbsp;&nbsp;<i class="fa fa-facebook"></i></button>
+	  <button ng-click="logvm.loginFB()" class="btn">Log In with&nbsp;&nbsp;<i class="fa fa-google-plus"></i></button> -->
+	  <a ng-click="logvm.forgotPassword=true;"href="">Forgot your password?</a>
+  </div>
+  
+  <!--Forgot Password Form-->
+  <div ng-if="logvm.forgotPassword && logvm.forgotPassword2" ng-class="{active: logvm.credentials.loginVerifcation.length}" class="input-group">
+    <input type="text" class="form-control" id="loginVerifcation" ng-model="logvm.credentials.loginVerifcation">
+    <label for="loginVerifcation">Verification Code</label>
+  </div>
+  
+  <div ng-if="logvm.forgotPassword && logvm.forgotPassword2" ng-class="{active: logvm.credentials.newPassword.length}" class="input-group">
+    <input type="password" class="form-control" id="newPassword" ng-model="logvm.credentials.newPassword">
+    <label for="newPassword">New Password</label>
+  </div>
+  
+   <div ng-if="logvm.forgotPassword && logvm.forgotPassword2" ng-class="{active: logvm.credentials.newPasswordConfirm.length}" class="input-group">
+    <input type="password" class="form-control" id="newPasswordConfirm" ng-model="logvm.credentials.newPasswordConfirm">
+    <label for="newPasswordConfirm">Confirm New Password</label>
+  </div>
+  
+  <div ng-if="logvm.forgotPassword" class="forgot-actions">
+	  <button type="submit" ng-if="logvm.forgotPassword2" ng-click="logvm.resetPassword()" class="btn btn-default change-password">Change Password</button>
+	  <button type="submit" ng-click="logvm.getResetToken()" class="btn btn-default">
+	  	<span ng-if="!logvm.forgotPassword2">Get</span>
+	  	<span ng-if="logvm.forgotPassword2">Resend</span> Verification Code
+	  </button>
+	  <a ng-if="!logvm.customerReset" ng-click="logvm.forgotPassword=false;"href="">Remembered your password?</a>
+  </div>
+  
+  
+</form>

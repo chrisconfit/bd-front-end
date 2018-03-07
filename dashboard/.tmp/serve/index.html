@@ -1,0 +1,93 @@
+<!doctype html>
+<html ng-app="inspinia">
+  <head>
+    <meta charset="utf-8">
+    <title>Blue Delta Jeans Admin</title>
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+		<link rel="manifest" href="/assets/images/manifest.json">
+		<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+		<script src="https://use.typekit.net/rjf0vtn.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../bower_components/metisMenu/dist/metisMenu.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="app/index.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-controller="MainController as main" class="{{main.state.current.name | routeToClass}}">
+	
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div ui-view></div>
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/pace/pace.js"></script>
+    <script src="../bower_components/metisMenu/dist/metisMenu.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+    <script src="assets/scripts/shared/sqPaymentForm.directive.js"></script>
+    <script src="assets/scripts/shared/api.service.js"></script>
+    <script src="assets/scripts/shared/user.service.js"></script>
+		
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <script src="app/index.module.js"></script>
+    <script src="app/index.route.js"></script>
+    <script src="app/index.run.js"></script>
+    <script src="app/inspinia.js"></script>
+    <script src="app/clients/clients-edit.controller.js"></script>
+    <script src="app/clients/clients.controller.js"></script>
+    <script src="app/directives/pagination.directive.js"></script>
+    <script src="app/directives/sorter.directive.js"></script>
+    <script src="app/fitmatch/fitmatch.controller.js"></script>
+    <script src="app/fitmatch/fitmatch.edit.controller.js"></script>
+    <script src="app/main/main.controller.js"></script>
+    <script src="app/orders/order.controller.js"></script>
+    <script src="app/orders/orders.callback.controller.js"></script>
+    <script src="app/orders/orders.edit.controller.js"></script>
+    <script src="app/login/login.js"></script>
+    <script src="app/plugins/controllers.js"></script>
+    <script src="app/plugins/directives.js"></script>
+    <script src="app/components/address-choice/address.controller.js"></script>
+    <script src="app/components/key-in-cc/keyInModal.controller.js"></script>
+    <script src="app/components/user-choice/userChoice.controller.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+		<script src="assets/scripts/oclazyload/dist/ocLazyLoad.min.js"></script>	
+  </body>
+</html>

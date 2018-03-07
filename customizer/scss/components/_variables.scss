@@ -1,0 +1,60 @@
+/* Theme colors */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+$colorText:#1d1d1d;
+$blue: #004964;
+$tan:#b8a98c;
+$lightBlue: #d8e7ea;
+$lightGrey:#f1f1f1;
+$grey:#bac2c5;
+$darkerBlue: #4f7e84;
+$peach:#f3ece2;
+$darkBlue: #004964;
+$teal: #41778b;
+$darkGrey:#363839;
+$greyBlue:#e8edef;
+
+/* Button colors */
+$colorBtnPrimary: $blue; // boring grey
+$colorBtnPrimaryHover: darken($colorBtnPrimary, 10%);
+$colorBtnPrimaryActive: darken($colorBtnPrimaryHover, 10%);
+
+$colorBtnSecondary: #424242;
+$colorBtnSecondaryHover: darken($colorBtnSecondary, 10%);
+$colorBtnSecondaryActive: darken($colorBtnSecondaryHover, 10%);
+
+/* Text link colors */
+$colorLink: $darkBlue;
+$colorLinkHover: darken($colorLink, 15%);
+
+/* Text colors */
+$colorText: #1d1d1d;
+$colorTextGrey: #777;
+
+
+$borderColor:#ebebeb;
+
+/* Helper colors */
+$disabledGrey: #dfdfdf;
+$disabledBorder: darken(#ebebeb, 25%);
+$errorRed: #dc0000;
+$errorRedBg: lighten($blue, 55%);
+$successGreen: #0a942a;
+
+/* Typography */
+$proximaOpen: "proxima-nova",'Open Sans', sans-serif;
+$headerFontStack:$proximaOpen;
+$bodyFontStack:$proximaOpen;
+
+
+/*Sass Media Query Break Points*/
+$small:480px;
+$medium:950px; 
+$large:951px;
+$xlarge:1200px;
+
+$MvpHeight : calc(100vh - 210px);
+$MpHeight2 : calc(100vh - 113px);
+$vpHeight : calc(100vh - 69px);
+$vpHeight2 : calc(100vh - 69px);
+$deskMin : 800px;

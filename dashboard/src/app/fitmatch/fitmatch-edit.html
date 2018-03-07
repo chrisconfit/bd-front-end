@@ -1,0 +1,189 @@
+<div class="order-page orders-edit-page">
+  <toaster-container></toaster-container>
+
+  <!--Header-->
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div id="form-control-buttons" class="pull-right" style="margin-top:20px;">
+      <button ng-click="vm.saveFM()" class="btn btn-primary btn-success"><span ng-if="!vm.newFM">Save</span><span ng-if="vm.newFM">Create</span></button>
+      <button ng-click="vm.orderFM()" ng-if="!vm.newFM" ng-class="{disabled:vm.fmData.ordered_at}" class="btn btn-primary btn-flat">
+        <span ng-if="!vm.fmData.ordered_at">Create Order</span>
+        <span ng-if="vm.fmData.ordered_at">Already Ordered</span>
+      </button>
+      <button ng-click="vm.deleteFM()" ng-if="!vm.newFM" class="btn btn-primary btn-danger">Delete</button>
+    </div>
+    <h1 ng-if="!vm.newFitMatch">Fit Match {{vm.fmData.id}}</h1>
+    <h1 ng-if="vm.newFitMatch">Create New Fit Match Request</h1>
+  </div>
+
+  <div class="wrapper wrapper-content">
+    <div class="row">
+      <form name="f.fmForm">
+
+        <!--
+        Client/Payment Details
+        -->
+
+        <div class="col-md-6">
+
+          <div class="ibox" ng-click="primaryBox=1" ng-class="{'ibox-primary':primaryBox==1}">
+            <div class="ibox-title">
+              <h3>Client </h3>
+            </div>
+
+            <div class="ibox-content ibox-profile">
+              <!--Add Client Button-->
+              <a ng-if="!vm.fmData.user" href="" ng-click="vm.editUser()" class="btn btn-flat btn-primary btn-block">Add a Client</a>
+              <!--Order User Validation-->
+              <input type="hidden" name="user_id" ng-model="vm.fmData.user.id" required>
+              <small ng-show="f.fmForm.submitted && f.fmForm.user_id.$error.required" class="text-danger">Please Choose a Client</small>
+
+              <ul ng-if="vm.fmData.user.id" class="list-group list-group-unbordered">
+
+
+                <!--Client Info-->
+                <li class="list-group-item clearfix">
+                  <b>Customer</b>
+                  <div class="pull-right">
+                    <a ui-sref="clients.edit({clientId: vm.fmData.user.id})">{{vm.fmData.user.first_name}} {{vm.fmData.user.last_name}}</a>
+                    &nbsp;&nbsp;<a ng-click="vm.editUser()"><i class="fa fa-edit"></i></a>
+                  </div>
+                </li>
+                <li class="list-group-item clearfix">
+                  <b>Email</b> <a href="mailto:{{vm.fmData.user.email}}" class="pull-right">{{vm.fmData.user.email}}</a>
+                </li>
+
+
+                <!--Shipping Address-->
+                <li class="list-group-item clearfix">
+                  <p><b>Shipping Address</b><a class="pull-right fa fa-edit" ng-click="vm.editAddress('Shipping', 'fa-truck')" href="#"></a></p>
+                  <p ng-if="vm.fmData.address">{{vm.fmData.user.first_name}} {{vm.fmData.user.last_name}}<br>
+                    {{vm.fmData.address.address_line_1}}<br>
+                    {{vm.fmData.address.address_line_2}}<br ng-if="vm.fmData.address.addressLine2 && vm.fmData.address.addressLine2!=''">
+                    {{vm.fmData.address.city}}, {{vm.fmData.address.state}} {{vm.fmData.address.zip}}</p>
+                  <a ng-if="!vm.fmData.address" ng-click="vm.editAddress('Shipping', 'fa-truck')" href="">Add Address</a>
+                  <!--Address Validation-->
+                  <input type="hidden" ng-model="vm.fmData.shipping_address_id" name="shipping_address_id" required>
+                  <br ng-if="f.fmForm.submitted && f.fmForm.shipping_address_id.$error.required" >
+                  <small ng-show="f.fmForm.submitted && f.fmForm.shipping_address_id.$error.required" class="text-danger">Please Choose a Shipping Address</small>
+                </li>
+                <li class="list-group-item clearfix">
+                  <div class="form-group">
+		                <label>Shipping Phone Number:</label>
+										<input type="text" class="form-control" style="width: 100%;" ng-model="vm.fmData.shipping_phone" aria-invalid="false">
+		              </div>
+								</li>
+              </ul>
+                <!--Payment Info-->
+
+
+                <p class="list-group-item clearfix">
+                  <p><b>Payment Info</b></p>
+                  <!--Primary Card Information-->
+                  <p ng-if="vm.fmData.primary_card">
+                    <span style="width:45px; display:inline"> {{vm.fmData.primary_card.brand | ccName}}</span> -
+                    &nbsp;&nbsp;**** **** **** {{vm.fmData.primary_card.last_4}}
+                  </p>
+                  <!--Payment Buttons-->
+                  <p><b>If customer did not return fit match box, charge card on file and cancel the order</b></p>
+                  <p ng-if="vm.pullingCards">Getting Credit Card info...</p>
+                  <a ng-class="{'disabled':vm.pullingCards}" style="margin-bottom:5px" href="#" ng-click="vm.captureCC()"
+                     class="btn btn-flat btn-success btn-primary">
+                    <b ng-if="!vm.fmData.credit_card_id">Save/Charge Credit Card</b>
+                    <b ng-if="vm.fmData.credit_card_id">Edit/Charge Credit Card</b>
+                  </a>
+                  <input type="hidden" ng-model="vm.fmData.credit_card_id" name="credit_card_id" required>
+                  <br ng-if="f.fmForm.submitted && f.fmForm.credit_card_id.$error.required" >
+                  <small ng-show="f.fmForm.submitted && f.fmForm.credit_card_id.$error.required" class="text-danger">Please enter a Credit Card</small>
+                </li>
+
+              </ul>
+            </div>
+            <!-- /.ibox-content -->
+          </div>
+          <!-- /.ibox -->
+        </div><!-- /.col -->
+
+
+
+
+        <!--
+        Order Details
+        -->
+
+        <div class="col-md-6">
+          <div class="ibox clearfix" ng-click="primaryBox=2" ng-class="{'ibox-primary':primaryBox==2}">
+            <div class="ibox-title">
+              <h3>
+                Package Details
+                <div class="pull-right" ng-if="!vm.newFM">
+                  <a ng-if="!vm.EditMode" class="fa fa-edit" ng-click="vm.beginEdit()" href="#"></a>
+                  <a ng-if="vm.EditMode" class="fa fa-save" ng-click="vm.saveFM(); vm.EditMode=false" href="#"></a>
+                  <a ng-if="vm.EditMode" class="fa fa-undo" ng-click="vm.clearEdit()" href="#"></a>
+                </div>
+              </h3>
+            </div>
+            <div class="clearfix ibox-content">
+
+              <!--Requested Fabrics-->
+              <label class="control-label">Requested Fabrics</label>
+              <ul class="list-group jean-list-edit list-group-unbordered">
+                <li class="list-group-item clearfix" ng-repeat="fabric_id in vm.fmData.requested_fabric_ids track by $index">
+                  {{vm.fabric_list_item_name(fabric_id)}}
+                  <a ng-if="vm.EditMode" class="pull-right" ng-click="vm.removeFabric($index)"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div ng-if="vm.EditMode && vm.fmData.requested_fabric_ids.length<10" class="clearfix">
+                <select class="form-control pull-right"
+                        style="width:100%; margin-top:10px;"
+                        ng-options="fabric.id as vm.fabric_list_item_name(fabric.id)
+                        group by fabric.fabric_type
+                        disable when vm.fmData.requested_fabric_ids.indexOf(fabric.id) > -1 for fabric in
+                        vm.data.fabrics | orderBy:['-deleted_at','fabric_type']"
+                        ng-model="vm.fabric_id_to_add">
+                </select>
+                <a ng-click="vm.fmData.requested_fabric_ids.push(vm.fabric_id_to_add)"
+                   style="margin-top:10px; margin-bottom:10px;" class="btn btn-flat btn-primary btn-success pull-right">Add Fabric</a>
+              </div>
+
+              <!--FM Package Dates-->
+              <ul class="list-group jean-list-edit list-group-unbordered">
+                <li class="list-group-item clearfix">
+                  <div class="form-group">
+                    <label>Package Shipped:</label>
+                    <div class="input-group date">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                      <input type="datetime" class="form-control" ng-model="vm.fmData.shipped_date" date-time view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item clearfix">
+                  <div class="form-group">
+                    <label>Form Received:</label>
+                    <div class="input-group date">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                      <input type="datetime" class="form-control" ng-model="vm.fmData.form_received_date" date-time view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                </li>
+              </ul>
+
+              <!--FM Status-->
+              <br>
+              <label>Status:</label>
+              <p ng-if="vm.fmData.shipped_date==null && vm.fmData.form_received_date==null&& vm.paid_at==null">Requested</p>
+              <p ng-if="vm.fmData.shipped_date && vm.fmData.form_received_date==null&& vm.paid_at==null">Shipped</p>
+              <p ng-if="vm.fmData.shipped_date && vm.fmData.form_received_date && vm.fmData.ordered_at==null&& vm.paid_at==null">Form Received</p>
+              <p ng-if="vm.fmData.shipped_date && vm.fmData.form_received_date && vm.fmData.ordered_at && vm.paid_at==null">Order Created</p>
+              <p ng-if="vm.fmData.paid_at">Canceled</p>
+              {{vm.form_received_date}}
+              <!--<p ng-if="">Ordered</p>-->
+
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div><!-- /.row -->
+  </div>
+</div>

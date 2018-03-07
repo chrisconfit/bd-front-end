@@ -1,0 +1,94 @@
+<div class="cart-header">
+  <img src="/images/bluedelta-logo-blue.jpg">
+</div>
+
+<div class="container pay-page page-container">
+
+  <div ng-if="!vm.user.loaded" class="pay-user-loading">
+    <p><i class="fa fa-spin fa-circle-o-notch"></i>&nbsp;&nbsp;Getting user data...</p>
+  </div>
+
+  <div ng-show="vm.user.id" class="user-box clearfix">
+    <h5><i class="fa fa-user"></i> {{vm.user.first_name}} {{vm.user.last_name}}</h5>
+    <a class="btn btn-primary" ng-click="vm.logout()">Logout</a>
+  </div>
+
+  <div ng-if="!vm.userLoggedIn" class="pay-login-form">
+    <h3 class="popup-title">Login or Register to Continue</h3>
+    <div class="cft-g login-reg-grid">
+      <div class="cft-gi">
+        <h4>Log In</h4>
+        <login-form callback="vm.authCallback" redirect="NULL"></login-form>
+      </div><!--
+			--><div class="cft-gi">
+        <h4>Register</h4>
+        <register-form callback="vm.authCallback" redirect="NULL"></register-form>
+      </div>
+    </div>
+    <div class="message-block" ng-show="vm.messages.message">
+      <p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+    </div>
+  </div>
+
+  <form ng-if="vm.userLoggedIn" novalidate class="cft-form checkout-form">
+
+    <!--Fit Match-->
+    <div>
+      <h1>{{vm.user.first_name}} {{vm.user.last_name}}'s Fit Match Package</h1>
+      <p>Includes the following fabrics:</p>
+      <ul class="fm-fabric-list">
+        <li ng-repeat="id in vm.fitMatch">
+          <img ng-src="https://images.bluedeltajeans.com/images/components/fabrics/thumb/{{id}}.jpg">
+          {{vm.data.lookup("fabrics", "id", id, "name")}}</li>
+      </ul>
+      <a href="https://bluedeltajeans.com/fit-match/" class="btn grey small">Edit Fabrics</a>
+      <p class="payment-instruction">Enter your shipping and payment details below</p>
+      <div class="shipping-addresses">
+        <h3>Shipping Details</h3>
+        <address-choice address-object="vm.add" user="vm.user"></address-choice>
+        <input type="hidden" ng-model="vm.add.id" required name="shipping_address" id="shippping_address">
+        <br>
+        <div ng-class="{active: vm.shipping_phone.length}" class="input-group">
+		      <input type="text" class="form-control" id="shipping_phone" ng-model="vm.shipping_phone" style="">
+		      <label for="shippping_phone">Shipping Phone</label>
+		    </div>
+      </div>
+    </div>
+    <hr>
+
+    <!--Payment-->
+    <div class="cc-info-box">
+      <h3>Credit Card Information</h3>
+      <p class="disclaimer">We require a valid credit or debit card for your order. No worries - you will not be charged unless you keep the package for longer than 30 days.</p>
+      <ul ng-show="!vm.cardForm.addingCard" class="card-list">
+        <li ng-if="vm.cardForm.loadingCards">Getting Credit Card Information...</li>
+        <li ng-repeat="cc in vm.cards">
+          <a href="" ng-click="vm.credit_card_id = cc.id" ng-class="{checked:vm.credit_card_id == cc.id}" class="check-box small"></a>
+          <label>
+            <span style="width:45px; display:inline-block; font-weight:700;">{{vm.truncateBrand(cc.brand)}}</span> -
+            &nbsp;&nbsp;**** **** **** {{cc.last_4}}
+          </label>
+        </li>
+      </ul>
+
+      <div class="new-card-form" ng-show="vm.cardForm.addingCard">
+        <sq-payment-form
+        input-styles="vm.inputStyles"
+        external-control="vm.fire"
+        input-config-overrides="vm.inputConfigOverrides"
+        nonce-received-callback="vm.nonceReceived"></sq-payment-form>
+      </div>
+
+      <a href="" ng-if="!vm.cardForm.loadingCards" ng-click="vm.cardForm.addingCard = !vm.cardForm.addingCard">
+        <span ng-if="!vm.cardForm.addingCard" class="edit-existing">Add New Card</span>
+        <span ng-if="vm.cardForm.addingCard && vm.cards.length" class="edit-existing">Use Existing Card</span>
+      </a>
+      
+
+    </div>
+    <hr>
+    <p ng-if="vm.fit_match_error" class="form-messages error">{{vm.fit_match_error}}</p>
+    <input type="submit" ng-if="!vm.cardForm.addingCard" ng-class="{disabled:!vm.credit_card_id || vm.ordering}" class="btn" ng-click="vm.orderFitMatch(vm.credit_card_id)" value="Submit">
+    <input type="submit" ng-if="vm.cardForm.addingCard"   ` ng-click="vm.addCard()" value="Submit">
+  </form>
+</div><!--./page-container

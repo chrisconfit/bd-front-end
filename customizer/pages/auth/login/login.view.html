@@ -1,0 +1,22 @@
+<navigation></navigation>
+
+<div class="page-container container">
+
+	<div class="page-title">
+		<h1 class="form-signin-heading">Sign in</h1>
+	</div>
+	
+	<div class="cft-g form-container-grid">
+	  
+	  <div class="cft-gi">
+		  <p>Not a member? Please <a href="register">register</a> instead.</p>
+			<login-form></login-form>
+	  </div><!--
+		--><div class="cft-gi">
+			<div class="message-block" ng-show="vm.messages.message">
+	  		<p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+			</div>
+		</div>	
+	</div>
+	   
+</div>

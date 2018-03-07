@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="customizer-page">
+		<div>
+			<div class="cft-g style-grid">
+			<div ng-repeat="style in vm.builder.styles | filter:vm.builder.styleByGender(vm.jean.data.gender)" class="cft-gi">
+				<slider image-click="vm.form.selectStyle(2)" slides="style['images_'+vm.jean.data.gender]"></slider>
+				<h3>{{style.name}}</h3>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

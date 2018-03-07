@@ -1,0 +1,173 @@
+	<!--Order Login-->
+	<div ng-show="vm.popups.loginOrRegister"	ng-click="vm.popups.loginOrRegister = false" class="popup-window">
+		<div class="popup-content loginOrRegister-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.loginOrRegister = false"></a>
+			<div class="popup-content-inner">
+				<h3 class="popup-title">Login or Register to Continue</h3>
+				<div class="cft-g login-reg-grid">
+					<div class="cft-gi">
+						<h4>Log In</h4>
+						<login-form callback="vm.authCallback"></login-form>
+					</div><!--
+					--><div class="cft-gi">
+						<h4>Register</h4>
+						<register-form callback="vm.authCallback"></register-form>
+					</div>
+				</div>
+				<div class="message-block" ng-show="vm.messages.message">
+		  		<p class="form-messages {{vm.messages.type}}" ng-bind-html="vm.messages.message"></p>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	
+	<!--Fabric Popup-->
+	<div ng-show="vm.popups.infoPop"	ng-click="vm.popups.infoPop = false" id="how-it-works" class="popup-window">
+		<div class="popup-content fabric-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.infoPop = false"></a>
+			<div class="popup-content-inner">
+				<div class="fabric-popup-inner-scroll">
+					<h3 class="popup-title">{{vm.activeItem.name}}</h3>
+					<h4 class="popup-sub-title">{{vm.activeItem.materials}}</h4>
+					<h4 class="popup-sub-title">{{vm.activeItem.supplier}}</h4>
+					<p class="fabric-description">{{vm.activeItem.description}}</p>
+					<div class="fabric-preveiw" 
+					style="background: url(https://s3.amazonaws.com/bluedelta-data/images/components/fabrics/preview/preview_{{vm.jeanData.fabric_id}}.jpg) no-repeat center center; 
+					-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;"></div>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	
+	<!--Namer Popup-->
+	<div ng-show="vm.popups.namer"	ng-click="vm.popups.namer = false" class="popup-window">
+		<div class="popup-content saved-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.namer = false"></a>
+			<div class="popup-content-inner">
+				<h3>Give your Jeans a name</h3>
+				<form class="cft-form">
+					<div ng-class="{active: vm.newJeanName}" class="input-group">
+				    <input type="text" class="form-control" id="jean-name" ng-model="vm.newJeanName" style="">
+				    <label for="jean-name">Jean Name</label>
+				  </div>
+					<btn ng-click="vm.jean.name = vm.newJeanName; alert(vm.jean.name); vm.runSave()" class="btn">Save</btn>
+					<btn class="btn btn-secondary" ng-click="vm.popups.namer=false">Cancel</btn> 
+				</form>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	<!--Save Opts Popup-->
+	<div ng-show="vm.popups.saveOpts"	ng-click="vm.keepEditing();" class="popup-window">
+		<div class="popup-content saved-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.keepEditing();"></a>
+			<div class="popup-content-inner">
+				<div ng-if="vm.jean.name">
+					<h3 class="popup-title">Your Jean has been saved!</h3>
+					<h4 class="popup-sub-title">What would you like to do next?</h4>
+					<div class="button-list">
+						<a class="btn" ng-click="vm.keepEditing();">Keep Customizing</a>
+						<a class="btn" ng-click="vm.goToCloset()">Go to Closet</a>
+						<a class="btn" ng-click="vm.startOver()">Start Over</a>
+					</div>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	<!--Jean Not Found-->
+	<div ng-show="vm.popups.noJean"	ng-click="vm.popups.noJean = false" class="popup-window">
+		<div class="popup-content noJean-popup" ng-click="$event.stopPropagation()">
+			<div class="popup-content-inner">
+					<h3 class="popup-title">This Jean could not be found!</h3>
+					<div class="button-list">
+						<a class="btn" ng-click="vm.startOver()">Start with a new pair</a>
+					</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	<!--Denim Weight Popup-->
+	<div ng-show="vm.popups.denim"	ng-click="vm.popups.denim = false" id="how-it-works" class="popup-window">
+		<div class="popup-content denim-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.denim = false"></a>
+			<div class="popup-content-inner">
+				<h3 class="popup-title">Raw Denim Weights</h3>		
+				<div class="denim-weight">
+					<h3>Lightweight</h3>
+					<h4>(Under 10 oz)</h4>
+					<p>Lightweight raw denim is the first, and easiest to wear category. A raw denim under 10 Oz. is  easy to break in as it won’t require anywhere near as much wearing time as a heavier fabric to attain a pleasant level of comfort.</p>
+					<p>A lightweight raw denim is much more comfortable from the beginning, and is lighter on your legs. There will be much fewer sweaty experiences caused from claustrophobia around your legs. The only drawback is that the fades achieved with this level of denim won’t look quite as spectacular as a heavier weight of denim.</p>
+				</div>
+				
+				<div class="denim-weight">
+					<h3>Mediumweight</h3>
+					<h4>(Between 10 Oz. – 12 Oz.)</h4>
+					<p>Second is the mid-weight denim, which is probably the most common of the raw denims in the market today. These are getting to the point where the denim starts off quite stiff, and are potentially quite heavy and hard to the touch.</p>
+					<p>The positives include the potential for a much better fade, a slightly warmer jean come winter and fall, and a longer lasting jean that is much harder to wear through. You will, however, take a longer break in time, and will have a little bit of lost flexibility upfront.</p>
+				</div>
+				
+				<div class="denim-weight">
+					<h3>Heavyweight</h3>
+					<h4>(Over 12 oz)</h4>
+					<p>Finally are the heavyweight jeans, the over 16 Oz. jeans, which can run up to a 32 Oz. These jeans take a real commitment, they’re going to take time and effort and honestly won’t feel great at first.</p>
+					<p>You’d have to be slightly self-loathing to want to stick your legs into a jean that can stand up on their own, but if lorem ipsum doler sit</p>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+
+					
+
+<!--Raw Denim Weight Popup-->
+	<div ng-show="vm.popups.rawDenim"	ng-click="vm.popups.rawDenim = false" class="popup-window">
+		<div class="popup-content denim-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.rawDenim = false"></a>
+			<div class="popup-content-inner">
+				<h3 class="popup-title">Raw Denim</h3>		
+				<div class="">
+					<p>Our Raw Denim is about as bespoke as it gets. Cut to measure for your body, the fabric will mould to your body, taking on different characteristics over time.</p>
+					<p>Raw Denim is dry clean only and comes in a number of different weights. For more information about care, please visit our <a href="http://bluedeltajeans.com/faq/" target="_blank">FAQ</a>
+					<div class="denim-weight">
+						<h3>Denim Weights</h3>
+						<p>The weight of any given fabric will play a large role in the way it feels, wears, and breaks in. A heavy weight jean will be stiff, starchy, and durable, but will require a lot of wear to break in to its optimal feel. A lightweight denim will be soft and comfortable from the very first wear.</p>
+						<p>With fabrics between 8 oz and 14.75 oz, we have weights to suit every need.</p>
+					</div>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+	
+	<!--Rinsed Denim Weight Popup-->
+	<!--<div ng-show="vm.popups.rinsedDenim"	ng-click="vm.popups.rinsedDenim = false" class="popup-window">
+		<div class="popup-content denim-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.rinsedDenim = false"></a>
+			<div class="popup-content-inner">
+				<h3 class="popup-title">Rinsed Denim</h3>		
+				<div class="">
+					<p>Our rinsed denim has a lot of the character of our raw denims but are easier to care for. You can throw these directly in the washing machine.
+					</p>
+				</div>
+			</div><!--./popup-content-inner-->
+		<!--</div>
+	</div>-->
+
+
+<!--Raw Denim Weight Popup-->
+	<div ng-show="vm.popups.hollandSherry"	ng-click="vm.popups.hollandSherry = false" class="popup-window">
+		<div class="popup-content denim-popup" ng-click="$event.stopPropagation()">
+			<a class="popup-closer" href="" ng-click="vm.popups.hollandSherry = false"></a>
+			<div class="popup-content-inner">
+				<h3 class="popup-title">Holland & Sherry</h3>		
+				<div class="">
+					<p>BDJ also carries Holland & Sherry. Made from an Italian cotton, Holland & Sherry is widely regarded as one of the premier fabrics in the world for tailored clothing. We are proud to carry 24 colors of this fabric. Lightweight, soft, and breathable from the first wear, this is the ultimate pant if you are looking for something a little different than raw denim.  Many of our customers make Holland & Sherry their exclusive pant for the golf course.</p>
+					<p>Our Holland and Sherry fabrics are cotton and should only be dry cleaned.</p>
+				</div>
+			</div><!--./popup-content-inner-->
+		</div>
+	</div>
+
+
+

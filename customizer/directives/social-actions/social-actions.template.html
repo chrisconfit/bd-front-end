@@ -1,0 +1,9 @@
+<div class="social-actions" ng-class="{active: display}">
+	<p class="share-loading" ng-if="!uploaded"><i class="fa fa-spin fa-circle-o-notch"></i> Loading...</p>
+	<ul ng-if="uploaded">
+		<li ng-click="sovm.share('facebook');"><i class="fa fa-facebook"></i></li>
+		<li ng-click="sovm.share('pinterest');"><i class="fa fa-pinterest"></i></li>
+		<li ng-click="sovm.share('twitter');"><i class="fa fa-twitter"></i></li>
+		<li ng-click="sovm.share('email');"><i class="fa fa-envelope"></i></li>
+	</ul>
+</div>

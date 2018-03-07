@@ -1,0 +1,171 @@
+
+
+			<!-- OLD CODE
+			<div class="info-box inquiry-alert">
+				<p><strong>Please note you are placing an order inquiry and not purchasing a pair of Blue Delta Jeans at this step.</strong></p>
+				<p>A BDJ Representative will be in touch with you within 24 hours to discuss further personalization options. Please contact us with any questions - <strong><a href="mailto:info@bluedeltajeans.com">info@bluedeltajeans.com</a></strong> | <strong>888.963.7879</strong></p>
+			</div>
+			<!--Step 1-->
+			<!--<div class="order-step-1" ng-if="vm.orderForm.step==1">
+				{{vm.orderCreateObj.copy_order_item_id}}
+				<div ng-if="(vm.orders | filter:vm.hasMeasurements).length">
+					<p>Use a fit from a previous purchase</p>
+					<div class="cft-g fit-grid">
+						<div ng-repeat="order in vm.orders | filter:vm.hasMeasurements | orderBy: '-dob' | limitTo: 3" class="cft-gi">
+							<div ng-click="vm.chooseOrderType(4, order);" class="jean-card"
+								ng-class="{active: vm.orderCreateObj.copy_order_item_id == order.order_items[0].id}">
+					      <img ng-src="{{order.order_items[0].jean_image_url}}">
+								<div class="box-content">
+					      	<h4>{{order.order_items[0].jean_name}} {{order.order_items[0].id}}</h4>
+									<h5 ng-if="{{order.due_date}}">Born: {{order.due_date | date : "longDate" : "CST" }}</h5>
+								</div>
+				      </div>
+						</div>
+					</div>
+
+					<h3>OR</h3>
+				</div>
+
+
+      	<p ng-if="!vm.orders.length">Every single pair of Blue Delta Jeans is tailored to your body. To ensure we are getting a perfect fit, there are 3 ways you can order your jeans:</p>
+				<div class="fit-options">
+					<div class="single-option" ng-class="{selected:vm.orderCreateObj.order_type_id==1}">
+						<h3>1. Get Fitted at Blue Delta</h3>
+						<p>Visit our Oxford MS fitting room to be measured by a Blue Delta Specialist</p>
+						<a href="" ng-click="vm.chooseOrderType(1)" ng-class="{checked:vm.orderCreateObj.order_type_id==1}" class="check-box"></a>
+						<span class="check-label">I'll get fitted at Blue Delta</span>
+					</div>
+					<div class="single-option" ng-class="{selected:vm.orderCreateObj.order_type_id==2}">
+						<h3>2. Get Fitted at a trusted tailor</h3>
+						<p>We have Blue Delta Partners all over the USA</p>
+						<a class="option-trigger" ng-click="vm.popups.tailors=true" href="">
+							<span ng-if="!vm.orderCreateObj.tailor_id">View a full list of tailors</span>
+							<span ng-if="vm.orderCreateObj.tailor_id">Change tailor</span>
+						</a>
+
+						<a href="" ng-click="vm.chooseOrderType(2)" ng-class="{checked:vm.orderCreateObj.order_type_id==2}" class="check-box"></a>
+						<span class="check-label">I'll get fitted at a Blue Delta Partner
+							<span ng-if="!vm.orderCreateObj.tailor_id && vm.orderCreateObj.order_type_id==2"><a ng-click="vm.popups.tailors=true" href="">(choose)</a></span>
+							<span ng-if="vm.orderCreateObj.tailor_id">
+							({{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "city")}},
+							{{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "state")}})</span>
+						</span>
+					</div>
+					<div class="single-option" ng-class="{selected:vm.orderCreateObj.order_type_id==3}">
+						<h3>3. Clone your favorite jeans</h3>
+						<p>Can't make it to a tailor? Do you already have a perfect fitting pair of jeans? We can CLONE them. Send us your jeans and we can use the measurements to create your unique pattern.</p>
+						<a href="" ng-click="vm.chooseOrderType(3)" ng-class="{checked:vm.orderCreateObj.order_type_id==3}" class="check-box"></a>
+						<span class="check-label">I'll clone a pair of my jeans</span>
+					</div>
+				</div>
+				<button class="btn" ng-class="{disabled : !vm.orderCreateObj.order_type_id}" ng-click="vm.orderForm.nextStep()">Next <i class="fa fa-angle-right"></i></button>
+			</div>
+
+
+			<!--Step 2
+			<div class="order-step-2" ng-if="vm.orderForm.step==2">
+				<div class="info-box">
+
+					<div ng-if="vm.orderCreateObj.order_type_id==1" class="blue-delta-message">
+						<h3>You are getting fitted in Oxford MS</h3>
+						<p>Each pair of Blue Delta Jeans is made custom for your body. After placing your order inquiry, we will be in touch to walk you through the next steps and schedule a fitting.</p>
+					</div>
+
+					<div ng-if="vm.orderCreateObj.order_type_id==2" class="tailor-message">
+						<h3>You are getting fitted at one of our trusted partners in {{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "city")}}, {{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "state")}}</h3>
+						<p>Each pair of Blue Delta Jeans is made custom for your body. After placing your order inquiry, we will be in touch to walk you through the next steps and schedule a fitting in {{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "city")}}, {{vm.lookup("tailors", "id", vm.orderCreateObj.tailor_id, "state")}}.</p>
+					</div>
+
+
+					<div ng-if="vm.orderCreateObj.order_type_id==3" class="clone-message">
+						<h3>You are Cloning your jeans</h3>
+						<p>Each pair of Blue Delta Jeans is made custom for your body. After placing your order inquiry, we will be in touch to walk you through the next steps.</p>
+					</div>
+
+					<div ng-if="vm.orderCreateObj.order_type_id==4" class="clone-message">
+						<h3>You are Cloning a previous order</h3>
+						<p>We'll use the measurements from this previous order to cut your new jeans. After placing your order inquiry, we will be in touch to walk you through the next steps.</p>
+						<p><strong>Please review the measurements below, and let us know if anything has changed in the "Additional Comments" box, before placing your order inquiry.</strong></p>
+						<div class="clone-display">
+							<div class="cft-g clone-grid">
+								<div class="cft-gi">
+									<img ng-src="{{vm.copyItem.jean_image_url}}">
+									<h5>Cloned Jean Name: {{vm.copyItem.jean_name}}</h5>
+								</div><!--
+								--><!--<div class="cft-gi">
+									<ul>
+										<li ng-repeat="m in vm.measurementKeys"><span class="measurement">{{m | scoreToSpace}}</span>: {{vm.copyItem[m]}}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<p><a class="btn grey change" href="" ng-click="vm.orderForm.step=1">Change order method</a></p>
+				</div>
+				<h3>Shipping Information</h3>
+				<p>Each pair of Blue Delta Jeans is made to fit and will take 4 - 6 weeks to arrive at your doorstep.</p>
+
+				<div class="personal-info">
+					<div class="input-container">
+						<label>Name:</label>
+						<span ng-if="!vm.editData.shipping_name">
+							<span class="user-value editable">
+								{{vm.orderCreateObj.shipping_name}}
+								<i class="fa fa-pencil" ng-if="vm.orderCreateObj.shipping_name.length"
+								ng-click="vm.editField('shipping_name')"></i>
+							</span>
+							<a ng-if="!vm.orderCreateObj.shipping_name.length" ng-click="vm.editField('shipping_name')" class="empty-value-button">
+							Add Name <i class="fa fa-plus-circle"></i></a>
+						</span>
+						<div class="input-group icon-control" ng-if="vm.editData.shipping_name">
+							<input type="text" ng-model="vm.orderCreateObj.shipping_name">
+							<div class="icon-controls">
+								<i class="fa fa-undo" ng-click="vm.revertField('shipping_name')"></i>
+								<i class="fa fa-check" ng-click="vm.editData.shipping_name = false;"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-container">
+						<label>Phone:</label>
+						<span ng-if="!vm.editData.shipping_phone">
+							<span class="user-value editable">
+								{{vm.orderCreateObj.shipping_phone}}
+								<i class="fa fa-pencil" ng-if="vm.orderCreateObj.shipping_phone.length"
+								ng-click="vm.editField('shipping_phone')"></i>
+							</span>
+							<a ng-if="!vm.orderCreateObj.shipping_phone.length" ng-click="vm.editField('shipping_phone')" class="empty-value-button edit-existing">
+							Add Phone Number <i class="fa fa-plus-circle"></i></a>
+						</span>
+						<div class="input-group icon-control" ng-if="vm.editData.shipping_phone">
+							<input type="text" ng-model="vm.orderCreateObj.shipping_phone">
+							<div class="icon-controls">
+								<i class="fa fa-undo" ng-click="vm.revertField('shipping_phone')"></i>
+								<i class="fa fa-check" ng-click="vm.editData.shipping_phone = false;"></i>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+
+				<div class="address-block">
+					<strong>Address:</strong>
+					<address-choice user="vm.user"></address-choice>
+				</div>
+
+				<div ng-class="{active:vm.orderCreateObj.comments}" class="input-group">
+					<textarea ng-model="vm.orderCreateObj.comments" ></textarea>
+					<label>Additional Comments</label>
+				</div>
+
+				<button ng-click="vm.placeOrder()" class="btn">Place Order Inquiry</button>
+
+			</div>
+
+    </div><!--/.main
+
+    -->

@@ -1,0 +1,36 @@
+<div ng-show="vm.popups.tailors" ng-click="vm.popups.tailors = false" id="tailors-popup" class="popup-window">
+	<div class="popup-content" ng-click="$event.stopPropagation()">
+		<a class="popup-closer" href="" ng-click="vm.popups.tailors = false"></a>
+		<div class="popup-content-inner">
+			
+			<h3 class="popup-title">Blue Delta Partner Tailors</h3>
+			<h5 class="sub-title">Choose a tailor below. We will be in touch to organize a measurement.</h5>
+			
+			<div class="check-list">
+				<ul class="tailor-list">
+					<li  ng-repeat="check in vm.tailors | orderBy : 'location'">
+						<input id="tailor_{{check.id}}" ng-checked="vm.orderCreateObj.tailor_id==check.id" 
+						ng-click="vm.orderCreateObj.tailor_id==check.id ? vm.orderCreateObj.tailor_id=null : vm.orderCreateObj.tailor_id=check.id"
+						value="{{check.id}}" type="checkbox">
+						<label for="tailor_{{check.id}}">{{check.city}}, {{check.state}}</label>
+					</li>
+				</ul>
+			</div>
+						
+			<button ng-click="vm.orderCreateObj.order_type_id=2; vm.popups.tailors=false" class="btn" ng-class="{disabled : vm.orderCreateObj.tailor_id==null}">Choose Tailor</button>	
+		</div><!--./popup-content-inner-->
+	</div>
+</div>
+
+
+<div ng-show="vm.popups.orderPlaced" id="order-complete-popup" class="popup-window">
+	<div class="popup-content" style="text-align: center;">
+		<div class="popup-content-inner">
+			<h3 class="popup-title">Your Order Inquiry has been placed.</h3>
+			<h5 class="sub-title">Thank you for you interest! A Blue Delta representative will be in touch within 24 Hours</h5>
+			<br><br>
+			<button ng-click="vm.goToCloset()" class="btn" >Go to Closet</button>&nbsp;&nbsp;	
+			<button ng-click="vm.startOver()" class="btn btn-secondary">Build More Jeans</button>	
+		</div><!--./popup-content-inner-->
+	</div>
+</div>
